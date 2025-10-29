@@ -13,24 +13,24 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mohamed Moustafa - DevOps Engineer & Infrastructure Specialist",
+  title: "Abdelrahman Kamal - DevOps Engineer & Infrastructure Specialist",
   description:
     "Professional DevOps Engineer specializing in cloud infrastructure, automation, and scalable systems. Expert in AWS, Kubernetes, Terraform, and modern DevOps practices.",
   keywords:
     "DevOps, Cloud Infrastructure, AWS, Kubernetes, Terraform, CI/CD, Automation, Infrastructure as Code",
   icons: "/images/icon.png",
   openGraph: {
-    title: "Mohamed Moustafa - DevOps Engineer",
+    title: "Abdelrahman Kamal - DevOps Engineer",
     description:
       "Professional DevOps Engineer specializing in cloud infrastructure, automation, and scalable systems.",
     url: "https://mo-mostafa-portfolio.vercel.app",
-    siteName: "Mohamed Moustafa Portfolio",
+    siteName: "Abdelrahman Kamal Portfolio",
     images: [
       {
         url: "/images/me.jpg",
         width: 1200,
         height: 630,
-        alt: "Mohamed Moustafa - DevOps Engineer",
+        alt: "Abdelrahman Kamal - DevOps Engineer",
       },
     ],
     locale: "en_US",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mohamed Moustafa - DevOps Engineer",
+    title: "Abdelrahman Kamal - DevOps Engineer",
     description:
       "Professional DevOps Engineer specializing in cloud infrastructure, automation, and scalable systems.",
     images: ["/images/me.jpg"],

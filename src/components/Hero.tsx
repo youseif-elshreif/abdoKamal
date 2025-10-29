@@ -35,7 +35,7 @@ export default function Hero() {
                   className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight"
                   style={{ color: "var(--text)" }}
                 >
-                  Mohamed Moustafa
+                  Abdelrahman Kamal
                 </h1>
               </div>
               <div className="text-xl sm:text-2xl lg:text-3xl font-semibold bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 bg-clip-text text-transparent">
@@ -126,7 +126,7 @@ export default function Hero() {
 
                 <Image
                   src={pic}
-                  alt="Mohamed Moustafa - DevOps Engineer"
+                  alt="Abdelrahman Kamal - DevOps Engineer"
                   width={400}
                   height={400}
                   className="relative w-full h-full object-cover rounded-2xl transition-all duration-500 hover:scale-105 border border-blue-400/30"

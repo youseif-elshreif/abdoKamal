@@ -1,7 +1,6 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
 import { useEffect } from "react";
 import { FiX, FiGithub } from "react-icons/fi";
 import { Project } from "../data/projects";
@@ -121,27 +120,136 @@ export default function ProjectModal({
 
             <div className="max-h-[calc(90vh-120px)] overflow-y-auto">
               <div className="p-8">
-                {/* Project Image */}
+                {/* Project Overview - Backend focused */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.1 }}
-                  className="relative h-72 sm:h-96 rounded-2xl overflow-hidden mb-8 border border-blue-400/20"
-                  style={{
-                    background: "var(--surface)",
-                    boxShadow:
-                      "0 20px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
-                  }}
+                  className="grid md:grid-cols-2 gap-8 mb-8"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 to-transparent z-10"></div>
-                  <Image
-                    src={project.image}
-                    alt={`${project.title} screenshot`}
-                    width={800}
-                    height={400}
-                    className="w-full h-full object-contain rounded-2xl p-4"
-                    style={{ background: "var(--surface-elevated)" }}
-                  />
+                  {/* API Endpoints */}
+                  <div
+                    className="p-6 rounded-2xl border border-blue-400/20"
+                    style={{
+                      background: "var(--surface-elevated)",
+                      boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)",
+                    }}
+                  >
+                    <h3
+                      className="text-lg font-bold mb-4"
+                      style={{ color: "var(--text)" }}
+                    >
+                      API Endpoints
+                    </h3>
+                    <div className="space-y-3">
+                      {project.details.apiEndpoints?.map((endpoint, index) => (
+                        <div
+                          key={index}
+                          className="flex items-start gap-3 p-3 rounded-lg border border-gray-600/20 bg-gray-800/30"
+                        >
+                          <span
+                            className={`px-2 py-1 text-xs font-medium rounded ${
+                              endpoint.method === "GET"
+                                ? "bg-green-500/20 text-green-400"
+                                : endpoint.method === "POST"
+                                ? "bg-blue-500/20 text-blue-400"
+                                : endpoint.method === "PUT"
+                                ? "bg-orange-500/20 text-orange-400"
+                                : "bg-red-500/20 text-red-400"
+                            }`}
+                          >
+                            {endpoint.method}
+                          </span>
+                          <div className="flex-1 min-w-0">
+                            <code
+                              className="text-sm font-mono"
+                              style={{ color: "var(--accent)" }}
+                            >
+                              {endpoint.path}
+                            </code>
+                            <p
+                              className="text-xs mt-1"
+                              style={{ color: "var(--text-secondary)" }}
+                            >
+                              {endpoint.description}
+                            </p>
+                          </div>
+                        </div>
+                      )) || (
+                        <div className="flex items-center gap-2">
+                          <FiGithub
+                            className="w-4 h-4"
+                            style={{ color: "var(--accent)" }}
+                          />
+                          <span
+                            className="text-sm"
+                            style={{ color: "var(--text-secondary)" }}
+                          >
+                            Backend API Service
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Key Features */}
+                  <div
+                    className="p-6 rounded-2xl border border-blue-400/20"
+                    style={{
+                      background: "var(--surface-elevated)",
+                      boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)",
+                    }}
+                  >
+                    <h3
+                      className="text-lg font-bold mb-4"
+                      style={{ color: "var(--text)" }}
+                    >
+                      Key Features
+                    </h3>
+                    <div className="space-y-2">
+                      {project.details.features?.map((feature, index) => (
+                        <div key={index} className="flex items-center gap-2">
+                          <div className="w-1.5 h-1.5 bg-blue-400 rounded-full"></div>
+                          <span
+                            className="text-sm"
+                            style={{ color: "var(--text-secondary)" }}
+                          >
+                            {feature}
+                          </span>
+                        </div>
+                      )) || (
+                        <>
+                          <div className="flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 bg-blue-400 rounded-full"></div>
+                            <span
+                              className="text-sm"
+                              style={{ color: "var(--text-secondary)" }}
+                            >
+                              RESTful API Design
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 bg-blue-400 rounded-full"></div>
+                            <span
+                              className="text-sm"
+                              style={{ color: "var(--text-secondary)" }}
+                            >
+                              Database Integration
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 bg-blue-400 rounded-full"></div>
+                            <span
+                              className="text-sm"
+                              style={{ color: "var(--text-secondary)" }}
+                            >
+                              Authentication System
+                            </span>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </div>
                 </motion.div>
 
                 {/* Tech Stack */}
@@ -181,6 +289,94 @@ export default function ProjectModal({
                     ))}
                   </div>
                 </motion.div>
+
+                {/* Database & Architecture Info */}
+                {(project.details.database || project.details.architecture) && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.25 }}
+                    className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8"
+                  >
+                    {/* Database Info */}
+                    {project.details.database && (
+                      <div
+                        className="p-6 rounded-2xl border border-blue-400/20"
+                        style={{
+                          background: "var(--surface-elevated)",
+                          boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)",
+                        }}
+                      >
+                        <h3
+                          className="text-lg font-bold mb-4"
+                          style={{ color: "var(--text)" }}
+                        >
+                          Database Structure
+                        </h3>
+                        <div className="space-y-3">
+                          <div className="flex items-center gap-2 mb-3">
+                            <span className="px-2 py-1 text-xs font-medium rounded bg-purple-500/20 text-purple-400">
+                              {project.details.database.type}
+                            </span>
+                          </div>
+                          <div className="space-y-2">
+                            {(
+                              project.details.database.collections ||
+                              project.details.database.tables
+                            )?.map((item, index) => (
+                              <div
+                                key={index}
+                                className="flex items-center gap-2"
+                              >
+                                <div className="w-1.5 h-1.5 bg-purple-400 rounded-full"></div>
+                                <code
+                                  className="text-sm font-mono"
+                                  style={{ color: "var(--accent)" }}
+                                >
+                                  {item}
+                                </code>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Architecture Info */}
+                    {project.details.architecture && (
+                      <div
+                        className="p-6 rounded-2xl border border-blue-400/20"
+                        style={{
+                          background: "var(--surface-elevated)",
+                          boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)",
+                        }}
+                      >
+                        <h3
+                          className="text-lg font-bold mb-4"
+                          style={{ color: "var(--text)" }}
+                        >
+                          Architecture
+                        </h3>
+                        <div className="space-y-2">
+                          {project.details.architecture.map((item, index) => (
+                            <div
+                              key={index}
+                              className="flex items-center gap-2"
+                            >
+                              <div className="w-1.5 h-1.5 bg-green-400 rounded-full"></div>
+                              <span
+                                className="text-sm"
+                                style={{ color: "var(--text-secondary)" }}
+                              >
+                                {item}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </motion.div>
+                )}
 
                 {/* Project Details */}
                 <motion.div
@@ -260,7 +456,61 @@ export default function ProjectModal({
                   </div>
                 </motion.div>
 
-                {/* Architecture Image */}
+                {/* API Endpoints - Backend specific */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                  className="mb-8"
+                >
+                  <div
+                    className="rounded-2xl p-6 border border-blue-400/20"
+                    style={{ background: "var(--surface-elevated)" }}
+                  >
+                    <h3
+                      className="text-xl font-bold mb-4"
+                      style={{ color: "var(--text)" }}
+                    >
+                      API Endpoints
+                    </h3>
+                    <div className="space-y-3 font-mono text-sm">
+                      <div
+                        className="flex items-center gap-3 p-3 rounded-lg"
+                        style={{ background: "var(--surface)" }}
+                      >
+                        <span className="px-2 py-1 text-xs bg-green-500/20 text-green-400 rounded">
+                          GET
+                        </span>
+                        <span style={{ color: "var(--text-secondary)" }}>
+                          /api/v1/users
+                        </span>
+                      </div>
+                      <div
+                        className="flex items-center gap-3 p-3 rounded-lg"
+                        style={{ background: "var(--surface)" }}
+                      >
+                        <span className="px-2 py-1 text-xs bg-blue-500/20 text-blue-400 rounded">
+                          POST
+                        </span>
+                        <span style={{ color: "var(--text-secondary)" }}>
+                          /api/v1/auth/login
+                        </span>
+                      </div>
+                      <div
+                        className="flex items-center gap-3 p-3 rounded-lg"
+                        style={{ background: "var(--surface)" }}
+                      >
+                        <span className="px-2 py-1 text-xs bg-orange-500/20 text-orange-400 rounded">
+                          PUT
+                        </span>
+                        <span style={{ color: "var(--text-secondary)" }}>
+                          /api/v1/users/:id
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+
                 {/* Links */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}

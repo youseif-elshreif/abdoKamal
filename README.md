@@ -1,4 +1,4 @@
-# Mohamed Moustafa - DevOps Engineer Portfolio
+# Abdelrahman Kamal - DevOps Engineer Portfolio
 
 A modern, professional portfolio website for a DevOps Engineer built with Next.js, TypeScript, Tailwind CSS, and Framer Motion. Features a clean, serious design with subtle animations and comprehensive accessibility support.
 
@@ -199,4 +199,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Built with ❤️ by Mohamed Moustafa**
+**Built with ❤️ by Abdelrahman Kamal**

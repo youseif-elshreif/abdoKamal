@@ -1,7 +1,7 @@
 export interface Project {
   id: string;
   title: string;
-  image: string;
+  image?: string; // Optional for backend projects
   tech: string[];
   short: string;
   details: {
@@ -11,6 +11,21 @@ export interface Project {
     implementation?: string[];
     repo: string;
     live?: string;
+    // New fields for backend projects
+    apiEndpoints?: {
+      method: string;
+      path: string;
+      description: string;
+    }[];
+    features?: string[];
+    architecture?: string[];
+    database?: {
+      type: string;
+      collections?: string[];
+      tables?: string[];
+    };
+    authentication?: string;
+    deployment?: string;
   };
 }
 
@@ -43,6 +58,43 @@ export const projects: Project[] = [
       results:
         "Reduced deployment time by 75%, achieved 90%+ test coverage, enabled zero-downtime releases, and established continuous security validation across all environments.",
       repo: "https://github.com/mhmdmstfa2010/XYZ-pipline",
+      apiEndpoints: [
+        {
+          method: "GET",
+          path: "/api/planets",
+          description: "Get all planets data",
+        },
+        {
+          method: "POST",
+          path: "/api/planets",
+          description: "Create new planet",
+        },
+        {
+          method: "GET",
+          path: "/api/health",
+          description: "Health check endpoint",
+        },
+      ],
+      features: [
+        "Real-time planet data updates",
+        "Solar system visualization",
+        "Multi-environment deployment",
+        "Automated testing pipeline",
+        "Security scanning integration",
+      ],
+      architecture: [
+        "Microservices architecture",
+        "Container-based deployment",
+        "Load balancing with ALB",
+        "Database connection pooling",
+        "Event-driven notifications",
+      ],
+      database: {
+        type: "MongoDB",
+        collections: ["planets", "users", "sessions", "logs"],
+      },
+      authentication: "JWT with refresh tokens",
+      deployment: "AWS ECS with auto-scaling",
     },
   },
   {
@@ -102,6 +154,48 @@ export const projects: Project[] = [
       results:
         "Achieved a secure, globally distributed, and cost-efficient raffle platform with zero server management. Auto-scaled to handle thousands of users, provided real-time winner draws, HTTPS encryption, and live participant tracking.",
       repo: "https://github.com/mhmdmstfa2010/Raffle-app",
+      apiEndpoints: [
+        {
+          method: "POST",
+          path: "/api/raffle/join",
+          description: "Join a raffle",
+        },
+        {
+          method: "GET",
+          path: "/api/raffle/{id}",
+          description: "Get raffle details",
+        },
+        {
+          method: "POST",
+          path: "/api/raffle/draw",
+          description: "Draw winner (admin only)",
+        },
+        {
+          method: "GET",
+          path: "/api/participants",
+          description: "List all participants",
+        },
+      ],
+      features: [
+        "Real-time raffle participation",
+        "Automated winner selection",
+        "Email notifications",
+        "Admin dashboard",
+        "Participant tracking",
+      ],
+      architecture: [
+        "Serverless architecture",
+        "Event-driven processing",
+        "Auto-scaling Lambda functions",
+        "CloudFront CDN distribution",
+        "Route53 DNS management",
+      ],
+      database: {
+        type: "DynamoDB",
+        collections: ["raffles", "participants", "winners", "notifications"],
+      },
+      authentication: "API Gateway with Lambda authorizers",
+      deployment: "Serverless Framework with Terraform",
     },
   },
   {

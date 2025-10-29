@@ -105,7 +105,7 @@ export default function NavBar() {
                     "0 4px 15px rgba(59, 130, 246, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
                 }}
               >
-                MM
+                AK
                 {/* Glow effect */}
                 <div className="absolute inset-0 rounded-xl bg-blue-400/20 blur-xl scale-110 -z-10"></div>
               </div>
@@ -114,7 +114,7 @@ export default function NavBar() {
                   className="font-bold text-sm leading-tight"
                   style={{ color: "var(--text)" }}
                 >
-                  Mohamed Moustafa
+                  Abdelrahman Kamal
                 </div>
                 <div
                   className="text-xs leading-tight"

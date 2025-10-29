@@ -67,14 +67,6 @@ const skillGroups: SkillGroup[] = [
       { name: "Fastify", icon: <FiServer />, level: "Intermediate" },
     ],
   },
-  {
-    title: "DevOps & Deployment",
-    skills: [
-      { name: "Docker", icon: <FiBox />, level: "Expert" },
-      { name: "AWS", icon: <FiCloud />, level: "Advanced" },
-      { name: "CI/CD", icon: <FiGitBranch />, level: "Advanced" },
-    ],
-  },
 ];
 
 interface SkillCardProps {
