@@ -1,28 +1,14 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { projects, Project } from "../data/projects";
+import { projects } from "../data/projects";
 import ProjectCard from "./ProjectCard";
-import ProjectModal from "./ProjectModal";
 
-export default function ProjectsGrid() {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+interface ProjectsGridProps {
+  onOpenModal: (projectId: string) => void;
+}
 
-  const handleOpenModal = (projectId: string) => {
-    const project = projects.find((p) => p.id === projectId);
-    if (project) {
-      setSelectedProject(project);
-      setIsModalOpen(true);
-    }
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSelectedProject(null);
-  };
-
+export default function ProjectsGrid({ onOpenModal }: ProjectsGridProps) {
   return (
     <section
       id="projects"
@@ -61,8 +47,9 @@ export default function ProjectsGrid() {
             className="text-lg max-w-3xl mx-auto leading-relaxed"
             style={{ color: "var(--text-secondary)" }}
           >
-            A selection of DevOps and infrastructure projects that showcase my
-            expertise in automation, scalability, and reliability engineering
+            A selection of backend and full-stack projects that showcase my
+            expertise in API development, database design, and scalable
+            architecture
           </p>
         </motion.div>
 
@@ -71,17 +58,11 @@ export default function ProjectsGrid() {
             <ProjectCard
               key={project.id}
               project={project}
-              onOpen={handleOpenModal}
+              onOpen={onOpenModal}
               index={index}
             />
           ))}
         </div>
-
-        <ProjectModal
-          project={selectedProject}
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-        />
       </div>
     </section>
   );
