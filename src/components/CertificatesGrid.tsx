@@ -51,23 +51,7 @@ function CertificateCard({ certificate, index }: CertificateCardProps) {
             "linear-gradient(145deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 100%)",
         }}
       >
-        {/* Recent badge */}
-        {dateInfo.isRecent && (
-          <div className="absolute -top-2 -right-2 z-20">
-            <motion.div
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              transition={{ delay: index * 0.1 + 0.3 }}
-              className="px-3 py-1 rounded-xl text-xs font-bold border bg-green-500/20 text-green-400 border-green-400/40"
-              style={{
-                boxShadow: "0 4px 12px rgba(34, 197, 94, 0.2)",
-              }}
-            >
-              <FiStar className="w-3 h-3 inline mr-1" />
-              NEW
-            </motion.div>
-          </div>
-        )}
+
 
         {/* Certificate image section */}
         <div className="relative h-48 mb-6 rounded-t-[24px] overflow-hidden bg-gradient-to-br from-blue-500/10 to-blue-600/20">
@@ -84,6 +68,7 @@ function CertificateCard({ certificate, index }: CertificateCardProps) {
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ delay: index * 0.1 + 0.2 }}
+            viewport={{ once: true, amount: 0.15 }}
             className="absolute top-4 left-4 z-20 w-12 h-12 rounded-2xl border border-blue-400/30 flex items-center justify-center shadow-lg"
             style={{
               background:
@@ -298,6 +283,7 @@ export default function CertificatesGrid() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="flex flex-wrap justify-center gap-2 mb-12"
+          viewport={{ once: true, amount: 0.15 }}
         >
           <div
             className="flex border border-blue-400/20 rounded-2xl p-2 shadow-lg"
@@ -353,6 +339,7 @@ export default function CertificatesGrid() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
+          viewport={{ once: true, amount: 0.15 }}
           className="flex justify-center mt-16"
         >
           <div

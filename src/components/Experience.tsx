@@ -169,6 +169,7 @@ function ExperienceCard({ experience, index }: ExperienceCardProps) {
                   key={idx}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
                   transition={{ delay: index * 0.1 + idx * 0.05 }}
                   className="flex items-start gap-3 p-3 rounded-xl border border-blue-400/10 hover:border-blue-400/25 transition-all duration-300"
                   style={{ background: "rgba(71, 85, 105, 0.1)" }}
@@ -214,6 +215,7 @@ function ExperienceCard({ experience, index }: ExperienceCardProps) {
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   whileHover={{ scale: 1.05 }}
+                  viewport={{ once: true, amount: 0.15 }}
                   transition={{ delay: index * 0.1 + techIndex * 0.03 }}
                   className="px-3 py-1.5 text-xs font-medium rounded-xl border border-blue-400/25 shadow-sm cursor-default"
                   style={{
@@ -330,6 +332,7 @@ export default function Experience() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
+          viewport={{ once: true, amount: 0.15 }}
           className="flex justify-center mt-16"
         >
           <div

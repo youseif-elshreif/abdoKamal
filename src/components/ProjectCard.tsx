@@ -73,6 +73,7 @@ export default function ProjectCard({
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
               whileHover={{ scale: 1.1 }}
+              viewport={{ once: true, amount: 0.15 }}
               className="absolute top-3 right-3 w-8 h-8 rounded-lg border border-blue-400/30 shadow-md opacity-0 group-hover:opacity-100 transition-all duration-300"
               style={{
                 background: "rgba(59, 130, 246, 0.2)",
@@ -118,6 +119,7 @@ export default function ProjectCard({
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2 + i * 0.1 }}
+                viewport={{ once: true, amount: 0.15 }}
                 className="px-3 py-1 text-xs font-medium rounded-full border border-blue-400/25 backdrop-blur-sm"
                 style={{
                   background: "rgba(59, 130, 246, 0.1)",
@@ -153,6 +155,7 @@ export default function ProjectCard({
             <motion.button
               whileHover={{ x: 4 }}
               onClick={() => onOpen(project.id)}
+              viewport={{ once: true, amount: 0.15 }}
               className="flex items-center gap-2 text-sm font-medium transition-colors duration-200"
               style={{ color: "var(--accent)" }}
             >

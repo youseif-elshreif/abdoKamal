@@ -164,6 +164,7 @@ export default function Footer() {
                   <motion.span
                     key={tech.label}
                     initial={{ opacity: 0, scale: 0.8 }}
+                    viewport={{ once: true, amount: 0.15 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ delay: index * 0.1 }}
                     className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium border border-blue-400/20"
@@ -193,6 +194,7 @@ export default function Footer() {
                     key={social.id}
                     href={social.href}
                     target={social.id !== "email" ? "_blank" : undefined}
+                    viewport={{ once: true, amount: 0.15 }}
                     rel={
                       social.id !== "email" ? "noopener noreferrer" : undefined
                     }
@@ -238,6 +240,7 @@ export default function Footer() {
                   href={link.href}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
                   transition={{ delay: index * 0.05 }}
                   className="block text-sm font-medium transition-all duration-300 hover:translate-x-1"
                   style={{
