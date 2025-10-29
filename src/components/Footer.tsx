@@ -1,7 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FiMail, FiLinkedin, FiGithub, FiExternalLink, FiHeart, FiArrowUp, FiCode, FiServer, FiCloud } from "react-icons/fi";
+import {
+  FiMail,
+  FiLinkedin,
+  FiGithub,
+  FiExternalLink,
+  FiHeart,
+  FiArrowUp,
+  FiCode,
+  FiServer,
+  FiCloud,
+} from "react-icons/fi";
 
 interface SocialLink {
   id: string;
@@ -17,22 +27,22 @@ const socialLinks: SocialLink[] = [
     icon: <FiMail className="w-5 h-5" />,
     label: "Email",
     href: "mailto:abdokamal.dev@gmail.com",
-    color: "hover:text-blue-400"
+    color: "hover:text-blue-400",
   },
   {
     id: "linkedin",
     icon: <FiLinkedin className="w-5 h-5" />,
     label: "LinkedIn",
     href: "https://linkedin.com/in/abdo-kamal",
-    color: "hover:text-blue-600"
+    color: "hover:text-blue-600",
   },
   {
     id: "github",
     icon: <FiGithub className="w-5 h-5" />,
     label: "GitHub",
     href: "https://github.com/abdokamal",
-    color: "hover:text-gray-300"
-  }
+    color: "hover:text-gray-300",
+  },
 ];
 
 interface QuickLink {
@@ -47,14 +57,14 @@ const quickLinks: QuickLink[] = [
   { id: "skills", label: "Skills", href: "#skills" },
   { id: "experience", label: "Experience", href: "#experience" },
   { id: "certificates", label: "Certificates", href: "#certificates" },
-  { id: "contact", label: "Contact", href: "#contact" }
+  { id: "contact", label: "Contact", href: "#contact" },
 ];
 
 function ScrollToTop() {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
   };
 
@@ -63,10 +73,10 @@ function ScrollToTop() {
       onClick={scrollToTop}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
-      className="group flex items-center justify-center w-12 h-12 rounded-2xl border border-blue-400/30 backdrop-blur-sm transition-all duration-300 hover:border-blue-400/60"
+      className="group flex items-center justify-center w-12 h-12 rounded-2xl border border-blue-400/30 shadow-md transition-all duration-300 hover:border-blue-400/60 hover:shadow-lg"
       style={{
-        background: 'rgba(59, 130, 246, 0.15)',
-        color: 'var(--accent)'
+        background: "rgba(59, 130, 246, 0.15)",
+        color: "var(--accent)",
       }}
     >
       <FiArrowUp className="w-5 h-5 group-hover:transform group-hover:-translate-y-0.5 transition-transform duration-200" />
@@ -81,7 +91,8 @@ export default function Footer() {
     <footer
       className="relative pt-20 pb-8 px-4 sm:px-6 lg:px-8 border-t border-blue-400/10"
       style={{
-        background: "linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)",
+        background:
+          "linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)",
       }}
     >
       {/* Enhanced background elements */}
@@ -93,7 +104,6 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Main footer content */}
         <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-12 mb-16">
-          
           {/* Brand section */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -110,8 +120,8 @@ export default function Footer() {
                 <div
                   className="w-12 h-12 rounded-2xl border border-blue-400/30 flex items-center justify-center"
                   style={{
-                    background: 'rgba(59, 130, 246, 0.15)',
-                    color: 'var(--accent)'
+                    background: "rgba(59, 130, 246, 0.15)",
+                    color: "var(--accent)",
                   }}
                 >
                   <FiServer className="w-6 h-6" />
@@ -136,16 +146,20 @@ export default function Footer() {
                 className="text-base leading-relaxed mb-6 max-w-md"
                 style={{ color: "var(--text-secondary)" }}
               >
-                Passionate about building robust infrastructure and automating workflows. 
-                Helping teams deliver software faster and more reliably through modern DevOps practices.
+                Passionate about building robust infrastructure and automating
+                workflows. Helping teams deliver software faster and more
+                reliably through modern DevOps practices.
               </p>
 
               {/* Tech focus badges */}
               <div className="flex flex-wrap gap-2 mb-6">
                 {[
                   { icon: <FiCloud className="w-3 h-3" />, label: "AWS" },
-                  { icon: <FiServer className="w-3 h-3" />, label: "Kubernetes" },
-                  { icon: <FiCode className="w-3 h-3" />, label: "CI/CD" }
+                  {
+                    icon: <FiServer className="w-3 h-3" />,
+                    label: "Kubernetes",
+                  },
+                  { icon: <FiCode className="w-3 h-3" />, label: "CI/CD" },
                 ].map((tech, index) => (
                   <motion.span
                     key={tech.label}
@@ -154,8 +168,8 @@ export default function Footer() {
                     transition={{ delay: index * 0.1 }}
                     className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium border border-blue-400/20"
                     style={{
-                      background: 'rgba(59, 130, 246, 0.1)',
-                      color: 'var(--accent)'
+                      background: "rgba(59, 130, 246, 0.1)",
+                      color: "var(--accent)",
                     }}
                   >
                     {tech.icon}
@@ -179,16 +193,18 @@ export default function Footer() {
                     key={social.id}
                     href={social.href}
                     target={social.id !== "email" ? "_blank" : undefined}
-                    rel={social.id !== "email" ? "noopener noreferrer" : undefined}
+                    rel={
+                      social.id !== "email" ? "noopener noreferrer" : undefined
+                    }
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    className={`group flex items-center justify-center w-10 h-10 rounded-xl border border-blue-400/20 backdrop-blur-sm transition-all duration-300 ${social.color}`}
+                    className={`group flex items-center justify-center w-10 h-10 rounded-xl border border-blue-400/20 shadow-sm transition-all duration-300 hover:shadow-md ${social.color}`}
                     style={{
-                      background: 'rgba(71, 85, 105, 0.2)',
-                      color: 'var(--text-muted)'
+                      background: "rgba(71, 85, 105, 0.2)",
+                      color: "var(--text-muted)",
                     }}
                     aria-label={social.label}
                   >
@@ -224,7 +240,7 @@ export default function Footer() {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.05 }}
                   className="block text-sm font-medium transition-all duration-300 hover:translate-x-1"
-                  style={{ 
+                  style={{
                     color: "var(--text-secondary)",
                   }}
                   onMouseEnter={(e) => {
@@ -256,8 +272,9 @@ export default function Footer() {
               >
                 Current Status
               </h4>
-              <div className="p-4 rounded-2xl border border-green-400/20"
-                style={{ background: 'rgba(34, 197, 94, 0.1)' }}
+              <div
+                className="p-4 rounded-2xl border border-green-400/20"
+                style={{ background: "rgba(34, 197, 94, 0.1)" }}
               >
                 <div className="flex items-center gap-2 mb-2">
                   <div className="w-2 h-2 bg-green-400 rounded-full animate-ping"></div>
@@ -295,7 +312,10 @@ export default function Footer() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="flex flex-col md:flex-row items-center justify-between gap-4"
         >
-          <div className="flex items-center gap-2 text-sm" style={{ color: "var(--text-muted)" }}>
+          <div
+            className="flex items-center gap-2 text-sm"
+            style={{ color: "var(--text-muted)" }}
+          >
             <span>© {currentYear} Abdo Kamal.</span>
             <span>Built with</span>
             <motion.div
@@ -307,7 +327,10 @@ export default function Footer() {
             <span>using Next.js & Tailwind CSS</span>
           </div>
 
-          <div className="flex items-center gap-6 text-sm" style={{ color: "var(--text-muted)" }}>
+          <div
+            className="flex items-center gap-6 text-sm"
+            style={{ color: "var(--text-muted)" }}
+          >
             <span>Made in Egypt 🇪🇬</span>
             <div className="flex items-center gap-1">
               <div className="w-1 h-1 bg-blue-400 rounded-full"></div>

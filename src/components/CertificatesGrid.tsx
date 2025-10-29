@@ -1,7 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FiAward, FiCalendar, FiBookOpen, FiTrendingUp, FiStar } from "react-icons/fi";
+import {
+  FiAward,
+  FiCalendar,
+  FiBookOpen,
+  FiTrendingUp,
+  FiStar,
+} from "react-icons/fi";
 import { certificates, type Certificate } from "../data/certificates";
 import { useState } from "react";
 import Image from "next/image";
@@ -15,14 +21,15 @@ function CertificateCard({ certificate, index }: CertificateCardProps) {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     const today = new Date();
-    const isRecent = (today.getTime() - date.getTime()) / (1000 * 3600 * 24) <= 365;
-    
+    const isRecent =
+      (today.getTime() - date.getTime()) / (1000 * 3600 * 24) <= 365;
+
     return {
       formatted: date.toLocaleDateString("en-US", {
         year: "numeric",
         month: "long",
       }),
-      isRecent
+      isRecent,
     };
   };
 
@@ -36,12 +43,12 @@ function CertificateCard({ certificate, index }: CertificateCardProps) {
       transition={{ duration: 0.6, delay: index * 0.1 }}
       className="group relative h-full"
     >
-      <div 
-        className="relative h-full backdrop-blur-xl border border-blue-400/20 hover:border-blue-400/40 transition-all duration-700 overflow-hidden"
+      <div
+        className="relative h-full border border-blue-400/20 hover:border-blue-400/40 transition-all duration-700 overflow-hidden shadow-xl hover:shadow-2xl"
         style={{
-          borderRadius: '24px',
-          background: 'rgba(30, 41, 59, 0.9)',
-          backdropFilter: 'blur(24px)',
+          borderRadius: "24px",
+          background:
+            "linear-gradient(145deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 100%)",
         }}
       >
         {/* Recent badge */}
@@ -51,9 +58,9 @@ function CertificateCard({ certificate, index }: CertificateCardProps) {
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
               transition={{ delay: index * 0.1 + 0.3 }}
-              className="px-3 py-1 rounded-xl text-xs font-bold border backdrop-blur-sm bg-green-500/15 text-green-400 border-green-400/40"
+              className="px-3 py-1 rounded-xl text-xs font-bold border bg-green-500/20 text-green-400 border-green-400/40"
               style={{
-                boxShadow: "0 4px 12px rgba(34, 197, 94, 0.2)"
+                boxShadow: "0 4px 12px rgba(34, 197, 94, 0.2)",
               }}
             >
               <FiStar className="w-3 h-3 inline mr-1" />
@@ -71,16 +78,17 @@ function CertificateCard({ certificate, index }: CertificateCardProps) {
             fill
             className="object-cover group-hover:scale-110 transition-transform duration-700"
           />
-          
+
           {/* Floating cert icon */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ delay: index * 0.1 + 0.2 }}
-            className="absolute top-4 left-4 z-20 w-12 h-12 rounded-2xl border border-blue-400/30 flex items-center justify-center backdrop-blur-sm"
+            className="absolute top-4 left-4 z-20 w-12 h-12 rounded-2xl border border-blue-400/30 flex items-center justify-center shadow-lg"
             style={{
-              background: 'rgba(30, 41, 59, 0.8)',
-              color: 'var(--accent)'
+              background:
+                "linear-gradient(145deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 100%)",
+              color: "var(--accent)",
             }}
           >
             <FiAward className="w-6 h-6" />
@@ -97,7 +105,7 @@ function CertificateCard({ certificate, index }: CertificateCardProps) {
             >
               {certificate.name}
             </h3>
-            
+
             <div className="flex items-center gap-3 mb-4">
               <div
                 className="text-base font-semibold flex-1"
@@ -108,7 +116,10 @@ function CertificateCard({ certificate, index }: CertificateCardProps) {
             </div>
 
             {/* Date info */}
-            <div className="flex items-center gap-2 text-sm" style={{ color: "var(--text-muted)" }}>
+            <div
+              className="flex items-center gap-2 text-sm"
+              style={{ color: "var(--text-muted)" }}
+            >
               <FiCalendar className="w-4 h-4" />
               <span>Earned: {dateInfo.formatted}</span>
             </div>
@@ -116,34 +127,49 @@ function CertificateCard({ certificate, index }: CertificateCardProps) {
 
           {/* Provider-specific benefits */}
           <div className="mb-6 flex-1">
-            <h4 
+            <h4
               className="text-xs font-bold mb-3 flex items-center gap-2"
               style={{ color: "var(--text)" }}
             >
-              <FiTrendingUp className="w-3 h-3" style={{ color: "var(--accent)" }} />
+              <FiTrendingUp
+                className="w-3 h-3"
+                style={{ color: "var(--accent)" }}
+              />
               Certification Benefits
             </h4>
             <div className="space-y-2">
               {certificate.issuer === "Amazon Web Services" && (
                 <>
-                  <div className="flex items-start gap-2 text-sm" style={{ color: "var(--text-secondary)" }}>
+                  <div
+                    className="flex items-start gap-2 text-sm"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
                     <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
                     <span>AWS Cloud expertise validation</span>
                   </div>
-                  <div className="flex items-start gap-2 text-sm" style={{ color: "var(--text-secondary)" }}>
+                  <div
+                    className="flex items-start gap-2 text-sm"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
                     <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
                     <span>Industry-recognized cloud skills</span>
                   </div>
                 </>
               )}
-              
+
               {certificate.issuer === "Microsoft" && (
                 <>
-                  <div className="flex items-start gap-2 text-sm" style={{ color: "var(--text-secondary)" }}>
+                  <div
+                    className="flex items-start gap-2 text-sm"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
                     <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
                     <span>Azure platform proficiency</span>
                   </div>
-                  <div className="flex items-start gap-2 text-sm" style={{ color: "var(--text-secondary)" }}>
+                  <div
+                    className="flex items-start gap-2 text-sm"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
                     <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
                     <span>Microsoft ecosystem knowledge</span>
                   </div>
@@ -157,12 +183,12 @@ function CertificateCard({ certificate, index }: CertificateCardProps) {
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-medium transition-all duration-300 border backdrop-blur-sm"
+              className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-medium transition-all duration-300 border shadow-md hover:shadow-lg"
               style={{
-                background: 'rgba(59, 130, 246, 0.15)',
-                color: 'var(--accent)',
-                borderColor: 'rgba(59, 130, 246, 0.3)',
-                boxShadow: "0 2px 8px rgba(59, 130, 246, 0.1)"
+                background: "rgba(59, 130, 246, 0.15)",
+                color: "var(--accent)",
+                borderColor: "rgba(59, 130, 246, 0.3)",
+                boxShadow: "0 2px 8px rgba(59, 130, 246, 0.1)",
               }}
             >
               <FiBookOpen className="w-4 h-4" />
@@ -172,10 +198,11 @@ function CertificateCard({ certificate, index }: CertificateCardProps) {
         </div>
 
         {/* Hover effects */}
-        <div 
+        <div
           className="absolute inset-0 rounded-[24px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
           style={{
-            background: 'radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.08) 0%, transparent 70%)',
+            background:
+              "radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.08) 0%, transparent 70%)",
           }}
         />
 
@@ -188,7 +215,7 @@ function CertificateCard({ certificate, index }: CertificateCardProps) {
 
 export default function CertificatesGrid() {
   const [sortBy, setSortBy] = useState<"date" | "issuer">("date");
-  
+
   const sortedCertificates = [...certificates].sort((a, b) => {
     if (sortBy === "date") {
       return new Date(b.issueDate).getTime() - new Date(a.issueDate).getTime();
@@ -197,7 +224,7 @@ export default function CertificatesGrid() {
     }
   });
 
-  const recentCertificates = certificates.filter(cert => {
+  const recentCertificates = certificates.filter((cert) => {
     const date = new Date(cert.issueDate);
     const today = new Date();
     return (today.getTime() - date.getTime()) / (1000 * 3600 * 24) <= 365;
@@ -208,7 +235,8 @@ export default function CertificatesGrid() {
       id="certificates"
       className="py-20 px-4 sm:px-6 lg:px-8 relative"
       style={{
-        background: "linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--primary) 100%)",
+        background:
+          "linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--primary) 100%)",
       }}
     >
       {/* Enhanced background elements */}
@@ -228,22 +256,22 @@ export default function CertificatesGrid() {
           className="text-center mb-16"
         >
           <div className="relative inline-block">
-            <motion.div 
+            <motion.div
               className="absolute -inset-4 bg-blue-500/10 rounded-2xl blur-xl"
-              animate={{ 
+              animate={{
                 scale: [1, 1.05, 1],
-                opacity: [0.3, 0.6, 0.3] 
+                opacity: [0.3, 0.6, 0.3],
               }}
-              transition={{ 
-                duration: 5, 
+              transition={{
+                duration: 5,
                 repeat: Infinity,
-                ease: "easeInOut" 
+                ease: "easeInOut",
               }}
             />
             <div className="relative">
-              <div 
+              <div
                 className="text-sm font-bold tracking-wider uppercase mb-3 flex items-center justify-center gap-2"
-                style={{ color: 'var(--accent)' }}
+                style={{ color: "var(--accent)" }}
               >
                 <div className="w-8 h-0.5 bg-blue-400/60"></div>
                 Professional Growth
@@ -258,8 +286,9 @@ export default function CertificatesGrid() {
             className="text-lg max-w-3xl mx-auto leading-relaxed"
             style={{ color: "var(--text-secondary)" }}
           >
-            Professional certifications and continuous learning achievements that validate my expertise 
-            in cloud technologies and industry best practices
+            Professional certifications and continuous learning achievements
+            that validate my expertise in cloud technologies and industry best
+            practices
           </p>
         </motion.div>
 
@@ -270,8 +299,12 @@ export default function CertificatesGrid() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="flex flex-wrap justify-center gap-2 mb-12"
         >
-          <div className="flex bg-slate-800/50 backdrop-blur-xl border border-blue-400/20 rounded-2xl p-2"
-            style={{ background: 'rgba(30, 41, 59, 0.8)' }}
+          <div
+            className="flex border border-blue-400/20 rounded-2xl p-2 shadow-lg"
+            style={{
+              background:
+                "linear-gradient(145deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 100%)",
+            }}
           >
             {(["date", "issuer"] as const).map((sort) => (
               <button
@@ -283,11 +316,15 @@ export default function CertificatesGrid() {
                     : "hover:text-blue-400"
                 }`}
                 style={{
-                  background: sortBy === sort 
-                    ? 'linear-gradient(135deg, rgba(59, 130, 246, 0.8) 0%, rgba(37, 99, 235, 0.9) 100%)'
-                    : 'transparent',
-                  color: sortBy === sort ? 'white' : 'var(--text-muted)',
-                  boxShadow: sortBy === sort ? '0 4px 16px rgba(59, 130, 246, 0.3)' : 'none'
+                  background:
+                    sortBy === sort
+                      ? "linear-gradient(135deg, rgba(59, 130, 246, 0.8) 0%, rgba(37, 99, 235, 0.9) 100%)"
+                      : "transparent",
+                  color: sortBy === sort ? "white" : "var(--text-muted)",
+                  boxShadow:
+                    sortBy === sort
+                      ? "0 4px 16px rgba(59, 130, 246, 0.3)"
+                      : "none",
                 }}
               >
                 {sort === "date" ? "Latest First" : "By Provider"}
@@ -297,10 +334,7 @@ export default function CertificatesGrid() {
         </motion.div>
 
         {/* Certificates grid */}
-        <motion.div 
-          layout
-          className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
-        >
+        <motion.div layout className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {sortedCertificates.map((certificate, index) => (
             <motion.div
               key={certificate.id}
@@ -321,14 +355,21 @@ export default function CertificatesGrid() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="flex justify-center mt-16"
         >
-          <div className="flex items-center gap-8 px-8 py-4 rounded-2xl border border-blue-400/20 backdrop-blur-sm"
-            style={{ background: 'rgba(30, 41, 59, 0.6)' }}
+          <div
+            className="flex items-center gap-8 px-8 py-4 rounded-2xl border border-blue-400/20 shadow-lg"
+            style={{
+              background:
+                "linear-gradient(145deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%)",
+            }}
           >
             <div className="text-center">
-              <div className="text-2xl font-bold" style={{ color: 'var(--accent)' }}>
+              <div
+                className="text-2xl font-bold"
+                style={{ color: "var(--accent)" }}
+              >
                 {certificates.length}
               </div>
-              <div className="text-xs" style={{ color: 'var(--text-muted)' }}>
+              <div className="text-xs" style={{ color: "var(--text-muted)" }}>
                 Total Certificates
               </div>
             </div>
@@ -337,16 +378,16 @@ export default function CertificatesGrid() {
               <div className="text-2xl font-bold text-green-400">
                 {recentCertificates}
               </div>
-              <div className="text-xs" style={{ color: 'var(--text-muted)' }}>
+              <div className="text-xs" style={{ color: "var(--text-muted)" }}>
                 Earned This Year
               </div>
             </div>
             <div className="w-px h-8 bg-blue-400/20"></div>
             <div className="text-center">
               <div className="text-2xl font-bold text-blue-400">
-                {new Set(certificates.map(c => c.issuer)).size}
+                {new Set(certificates.map((c) => c.issuer)).size}
               </div>
-              <div className="text-xs" style={{ color: 'var(--text-muted)' }}>
+              <div className="text-xs" style={{ color: "var(--text-muted)" }}>
                 Providers
               </div>
             </div>

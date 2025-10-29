@@ -1,7 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FiCalendar, FiMapPin, FiBriefcase, FiAward, FiTrendingUp } from "react-icons/fi";
+import {
+  FiCalendar,
+  FiMapPin,
+  FiBriefcase,
+  FiAward,
+  FiTrendingUp,
+} from "react-icons/fi";
 import { experiences, type Experience } from "../data/experience";
 
 interface ExperienceCardProps {
@@ -59,12 +65,12 @@ function ExperienceCard({ experience, index }: ExperienceCardProps) {
       </div>
 
       {/* Modern experience card */}
-      <div 
-        className="relative backdrop-blur-xl border border-blue-400/20 transition-all duration-700 hover:border-blue-400/40 ml-8"
+      <div
+        className="relative border border-blue-400/20 transition-all duration-700 hover:border-blue-400/40 ml-8 shadow-xl hover:shadow-2xl"
         style={{
-          borderRadius: '20px',
-          background: 'rgba(30, 41, 59, 0.85)',
-          backdropFilter: 'blur(24px)',
+          borderRadius: "20px",
+          background:
+            "linear-gradient(145deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 100%)",
         }}
       >
         {/* Card header with modern layout */}
@@ -75,10 +81,10 @@ function ExperienceCard({ experience, index }: ExperienceCardProps) {
                 <motion.div
                   whileHover={{ rotate: 360 }}
                   transition={{ duration: 0.5 }}
-                  className="w-10 h-10 rounded-xl border border-blue-400/30 flex items-center justify-center backdrop-blur-sm"
+                  className="w-10 h-10 rounded-xl border border-blue-400/30 flex items-center justify-center shadow-md"
                   style={{
-                    background: 'rgba(59, 130, 246, 0.15)',
-                    color: 'var(--accent)'
+                    background: "rgba(59, 130, 246, 0.15)",
+                    color: "var(--accent)",
                   }}
                 >
                   <FiBriefcase className="w-5 h-5" />
@@ -99,13 +105,15 @@ function ExperienceCard({ experience, index }: ExperienceCardProps) {
                 </div>
               </div>
             </div>
-            
+
             {/* Type badge */}
             <motion.span
               whileHover={{ scale: 1.05 }}
-              className={`px-4 py-2 rounded-xl text-xs font-bold border backdrop-blur-sm ${getTypeColor(experience.type)}`}
+              className={`px-4 py-2 rounded-xl text-xs font-bold border shadow-sm ${getTypeColor(
+                experience.type
+              )}`}
               style={{
-                boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)"
+                boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
               }}
             >
               {experience.type.replace("-", " ").toUpperCase()}
@@ -114,14 +122,22 @@ function ExperienceCard({ experience, index }: ExperienceCardProps) {
 
           {/* Meta information */}
           <div className="flex flex-wrap items-center gap-6 text-sm">
-            <div className="flex items-center gap-2" style={{ color: "var(--text-muted)" }}>
+            <div
+              className="flex items-center gap-2"
+              style={{ color: "var(--text-muted)" }}
+            >
               <FiCalendar className="w-4 h-4" />
               <span>
                 {formatDate(experience.startDate)} -{" "}
-                {experience.endDate ? formatDate(experience.endDate) : "Present"}
+                {experience.endDate
+                  ? formatDate(experience.endDate)
+                  : "Present"}
               </span>
             </div>
-            <div className="flex items-center gap-2" style={{ color: "var(--text-muted)" }}>
+            <div
+              className="flex items-center gap-2"
+              style={{ color: "var(--text-muted)" }}
+            >
               <FiMapPin className="w-4 h-4" />
               <span>{experience.location}</span>
             </div>
@@ -157,10 +173,14 @@ function ExperienceCard({ experience, index }: ExperienceCardProps) {
                   className="flex items-start gap-3 p-3 rounded-xl border border-blue-400/10 hover:border-blue-400/25 transition-all duration-300"
                   style={{ background: "rgba(71, 85, 105, 0.1)" }}
                 >
-                  <div className="flex-shrink-0 w-6 h-6 rounded-full border border-blue-400/30 flex items-center justify-center mt-0.5"
+                  <div
+                    className="flex-shrink-0 w-6 h-6 rounded-full border border-blue-400/30 flex items-center justify-center mt-0.5"
                     style={{ background: "rgba(59, 130, 246, 0.15)" }}
                   >
-                    <FiTrendingUp className="w-3 h-3" style={{ color: "var(--accent)" }} />
+                    <FiTrendingUp
+                      className="w-3 h-3"
+                      style={{ color: "var(--accent)" }}
+                    />
                   </div>
                   <span
                     className="text-sm leading-relaxed flex-1"
@@ -175,11 +195,12 @@ function ExperienceCard({ experience, index }: ExperienceCardProps) {
 
           {/* Technologies with improved design */}
           <div>
-            <h4 
+            <h4
               className="text-sm font-bold mb-4 flex items-center gap-2"
               style={{ color: "var(--text)" }}
             >
-              <div className="w-4 h-4 rounded border border-blue-400/30 flex items-center justify-center"
+              <div
+                className="w-4 h-4 rounded border border-blue-400/30 flex items-center justify-center"
                 style={{ background: "rgba(59, 130, 246, 0.15)" }}
               >
                 <div className="w-1.5 h-1.5 bg-blue-400 rounded-sm"></div>
@@ -194,11 +215,11 @@ function ExperienceCard({ experience, index }: ExperienceCardProps) {
                   whileInView={{ opacity: 1, scale: 1 }}
                   whileHover={{ scale: 1.05 }}
                   transition={{ delay: index * 0.1 + techIndex * 0.03 }}
-                  className="px-3 py-1.5 text-xs font-medium rounded-xl border border-blue-400/25 backdrop-blur-sm cursor-default"
+                  className="px-3 py-1.5 text-xs font-medium rounded-xl border border-blue-400/25 shadow-sm cursor-default"
                   style={{
                     background: "rgba(59, 130, 246, 0.12)",
                     color: "var(--accent)",
-                    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)"
+                    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
                   }}
                 >
                   {tech}
@@ -209,10 +230,11 @@ function ExperienceCard({ experience, index }: ExperienceCardProps) {
         </div>
 
         {/* Hover glow effect */}
-        <div 
+        <div
           className="absolute inset-0 rounded-[20px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
           style={{
-            background: 'radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.05) 0%, transparent 70%)',
+            background:
+              "radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.05) 0%, transparent 70%)",
           }}
         />
 
@@ -229,7 +251,8 @@ export default function Experience() {
       id="experience"
       className="py-20 px-4 sm:px-6 lg:px-8 relative"
       style={{
-        background: "linear-gradient(135deg, var(--secondary) 0%, var(--primary) 50%, var(--secondary) 100%)",
+        background:
+          "linear-gradient(135deg, var(--secondary) 0%, var(--primary) 50%, var(--secondary) 100%)",
       }}
     >
       {/* Enhanced background elements */}
@@ -249,22 +272,22 @@ export default function Experience() {
           className="text-center mb-20"
         >
           <div className="relative inline-block">
-            <motion.div 
+            <motion.div
               className="absolute -inset-4 bg-blue-500/10 rounded-2xl blur-xl"
-              animate={{ 
+              animate={{
                 scale: [1, 1.05, 1],
-                opacity: [0.3, 0.6, 0.3] 
+                opacity: [0.3, 0.6, 0.3],
               }}
-              transition={{ 
-                duration: 5, 
+              transition={{
+                duration: 5,
                 repeat: Infinity,
-                ease: "easeInOut" 
+                ease: "easeInOut",
               }}
             />
             <div className="relative">
-              <div 
+              <div
                 className="text-sm font-bold tracking-wider uppercase mb-3 flex items-center justify-center gap-2"
-                style={{ color: 'var(--accent)' }}
+                style={{ color: "var(--accent)" }}
               >
                 <div className="w-8 h-0.5 bg-blue-400/60"></div>
                 Professional Journey
@@ -279,17 +302,16 @@ export default function Experience() {
             className="text-lg max-w-3xl mx-auto leading-relaxed"
             style={{ color: "var(--text-secondary)" }}
           >
-            My professional evolution in DevOps and infrastructure engineering, 
-            building scalable systems and leading automation initiatives across diverse environments
+            My professional evolution in DevOps and infrastructure engineering,
+            building scalable systems and leading automation initiatives across
+            diverse environments
           </p>
         </motion.div>
 
         {/* Timeline with enhanced design */}
         <div className="relative">
           {/* Main timeline line */}
-          <div
-            className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-400/60 via-blue-500/40 to-blue-400/60"
-          />
+          <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-400/60 via-blue-500/40 to-blue-400/60" />
 
           {/* Experience cards */}
           <div className="space-y-12">
@@ -304,23 +326,30 @@ export default function Experience() {
         </div>
 
         {/* Bottom decoration */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
           className="flex justify-center mt-16"
         >
-          <div className="flex items-center gap-6 px-8 py-4 rounded-2xl border border-blue-400/20 backdrop-blur-sm"
-            style={{ background: 'rgba(30, 41, 59, 0.6)' }}
+          <div
+            className="flex items-center gap-6 px-8 py-4 rounded-2xl border border-blue-400/20 shadow-lg"
+            style={{
+              background:
+                "linear-gradient(145deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%)",
+            }}
           >
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-blue-400 rounded-full animate-ping"></div>
-              <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>
+              <span
+                className="text-sm font-medium"
+                style={{ color: "var(--text-secondary)" }}
+              >
                 Currently Building
               </span>
             </div>
             <div className="w-px h-4 bg-blue-400/20"></div>
-            <span className="text-sm" style={{ color: 'var(--text-muted)' }}>
+            <span className="text-sm" style={{ color: "var(--text-muted)" }}>
               Next-generation infrastructure solutions
             </span>
           </div>

@@ -149,18 +149,18 @@ export default function Skills() {
             >
               {/* Modern skill category card */}
               <div
-                className="relative backdrop-blur-2xl border border-blue-400/20 transition-all duration-700 hover:border-blue-400/40 overflow-hidden"
+                className="relative border border-blue-400/20 transition-all duration-700 hover:border-blue-400/40 overflow-hidden shadow-xl hover:shadow-2xl"
                 style={{
                   borderRadius: "20px",
-                  background: "rgba(30, 41, 59, 0.8)",
-                  backdropFilter: "blur(20px)",
+                  background:
+                    "linear-gradient(145deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 100%)",
                 }}
               >
                 {/* Card header */}
                 <div className="p-6 border-b border-blue-400/10">
                   <div className="flex items-center gap-3">
                     <div
-                      className="w-10 h-10 rounded-xl border border-blue-400/30 flex items-center justify-center backdrop-blur-sm transition-all duration-300 group-hover:scale-110"
+                      className="w-10 h-10 rounded-xl border border-blue-400/30 flex items-center justify-center shadow-md transition-all duration-300 group-hover:scale-110"
                       style={{
                         background: "rgba(59, 130, 246, 0.15)",
                         color: "var(--accent)",
@@ -209,7 +209,7 @@ export default function Skills() {
                       {/* Modern level indicator */}
                       <motion.span
                         whileHover={{ scale: 1.05 }}
-                        className={`px-3 py-1.5 text-xs font-bold rounded-xl border backdrop-blur-sm ${getLevelColor(
+                        className={`px-3 py-1.5 text-xs font-bold rounded-xl border shadow-sm ${getLevelColor(
                           skill.level
                         )}`}
                         style={{
@@ -247,7 +247,7 @@ export default function Skills() {
           className="flex justify-center mt-16"
         >
           <div
-            className="flex items-center gap-4 px-8 py-4 rounded-2xl border border-blue-400/20 backdrop-blur-sm"
+            className="flex items-center gap-4 px-8 py-4 rounded-2xl border border-blue-400/20 shadow-lg"
             style={{ background: "rgba(30, 41, 59, 0.6)" }}
           >
             <div className="flex items-center gap-2">
