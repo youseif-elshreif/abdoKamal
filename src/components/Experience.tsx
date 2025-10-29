@@ -375,7 +375,7 @@ export default function Experience() {
           <SectionHeader
             badge="Career Journey"
             title="Professional Experience"
-            description="My journey in DevOps and infrastructure development"
+            description="My journey in backend development and software engineering"
           />
         </div>
 

@@ -120,7 +120,7 @@ export default function NavBar() {
                   className="text-xs leading-tight"
                   style={{ color: "var(--accent)" }}
                 >
-                  DevOps Engineer
+                  Backend Developer
                 </div>
               </div>
             </div>

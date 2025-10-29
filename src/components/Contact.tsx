@@ -363,7 +363,7 @@ function ContactMethods() {
       title: "Email",
       value: "abdokamal.dev@gmail.com",
       href: "mailto:abdokamal.dev@gmail.com",
-      description: "Best for detailed discussions",
+      description: "Best for backend project discussions",
       primary: true,
     },
     {
@@ -381,7 +381,7 @@ function ContactMethods() {
       title: "GitHub",
       value: "View my code",
       href: "https://github.com/abdokamal",
-      description: "Check out my projects",
+      description: "View my backend code",
       primary: false,
     },
     {
@@ -595,7 +595,7 @@ export default function Contact() {
           {/* Header */}
           <SectionHeader
             title="Contact Me"
-            description="Let's discuss your project and see how we can work together to bring your ideas to life."
+            description="Let's discuss your backend project and see how we can build scalable solutions together."
           />
 
           {/* Content */}

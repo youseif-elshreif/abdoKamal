@@ -39,16 +39,16 @@ export default function Hero() {
                 </h1>
               </div>
               <div className="text-xl sm:text-2xl lg:text-3xl font-semibold bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 bg-clip-text text-transparent">
-                DevOps Engineer & Infrastructure Specialist
+                Backend Developer & Software Engineer
               </div>
               <p
                 className="text-lg max-w-2xl leading-relaxed"
                 style={{ color: "var(--text-secondary)" }}
               >
-                Passionate about building scalable infrastructure, automating
-                deployments, and creating reliable systems that empower
-                development teams to deliver exceptional software with
-                confidence.
+                Passionate about building robust backend systems, developing
+                scalable APIs, and architecting efficient database solutions
+                that power modern applications with high performance and
+                reliability.
               </p>
             </div>
 

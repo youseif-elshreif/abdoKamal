@@ -34,38 +34,45 @@ interface SkillGroup {
 
 const skillGroups: SkillGroup[] = [
   {
-    title: "CI/CD & Version Control",
+    title: "Backend Languages",
     skills: [
-      { name: "GitHub Actions", icon: <FiGitBranch />, level: "Expert" },
-      { name: "Jenkins", icon: <FiTool />, level: "Expert" },
+      { name: "Node.js", icon: <FiServer />, level: "Expert" },
+      { name: "Python", icon: <FiSettings />, level: "Advanced" },
+      { name: "Java", icon: <FiBox />, level: "Advanced" },
+      { name: "TypeScript", icon: <FiTool />, level: "Expert" },
     ],
   },
   {
-    title: "Cloud Platforms",
+    title: "Databases & Storage",
     skills: [
-      { name: "AWS", icon: <FiCloud />, level: "Expert" },
-      { name: "Azure", icon: <FiCloud />, level: "Beginner" },
+      { name: "MongoDB", icon: <FiCloud />, level: "Expert" },
+      { name: "PostgreSQL", icon: <FiServer />, level: "Advanced" },
+      { name: "Redis", icon: <FiActivity />, level: "Advanced" },
+      { name: "MySQL", icon: <FiSettings />, level: "Intermediate" },
     ],
   },
   {
-    title: "Infrastructure as Code",
+    title: "API Development",
     skills: [
-      { name: "Terraform", icon: <FiSettings />, level: "Expert" },
-      { name: "Ansible", icon: <FiTool />, level: "Advanced" },
+      { name: "REST APIs", icon: <FiGitBranch />, level: "Expert" },
+      { name: "GraphQL", icon: <FiMonitor />, level: "Advanced" },
+      { name: "WebSockets", icon: <FiActivity />, level: "Advanced" },
     ],
   },
   {
-    title: "Container Orchestration",
+    title: "Framework & Tools",
+    skills: [
+      { name: "Express.js", icon: <FiTool />, level: "Expert" },
+      { name: "Nest.js", icon: <FiBox />, level: "Advanced" },
+      { name: "Fastify", icon: <FiServer />, level: "Intermediate" },
+    ],
+  },
+  {
+    title: "DevOps & Deployment",
     skills: [
       { name: "Docker", icon: <FiBox />, level: "Expert" },
-      { name: "Kubernetes", icon: <FiServer />, level: "Advanced" },
-    ],
-  },
-  {
-    title: "Monitoring & Logging",
-    skills: [
-      { name: "Prometheus", icon: <FiActivity />, level: "Advanced" },
-      { name: "Grafana", icon: <FiMonitor />, level: "Advanced" },
+      { name: "AWS", icon: <FiCloud />, level: "Advanced" },
+      { name: "CI/CD", icon: <FiGitBranch />, level: "Advanced" },
     ],
   },
 ];
@@ -163,7 +170,7 @@ export default function Skills() {
       <SectionHeader
         badge="Technical Expertise"
         title="Skills & Technologies"
-        description="Mastery across the modern DevOps ecosystem, from cloud infrastructure to container orchestration and automation pipelines"
+        description="Expertise in modern backend development, from scalable APIs to robust database architectures and efficient server-side solutions"
       />
 
       {/* Skills grid with modern card design */}

@@ -137,7 +137,7 @@ export default function Footer() {
                     className="text-sm font-medium"
                     style={{ color: "var(--accent)" }}
                   >
-                    DevOps Engineer
+                    Backend Developer
                   </p>
                 </div>
               </motion.div>
@@ -146,20 +146,20 @@ export default function Footer() {
                 className="text-base leading-relaxed mb-6 max-w-md"
                 style={{ color: "var(--text-secondary)" }}
               >
-                Passionate about building robust infrastructure and automating
-                workflows. Helping teams deliver software faster and more
-                reliably through modern DevOps practices.
+                Passionate about building scalable backend systems and robust
+                APIs. Helping teams create efficient server-side solutions with
+                modern technologies and best practices.
               </p>
 
               {/* Tech focus badges */}
               <div className="flex flex-wrap gap-2 mb-6">
                 {[
-                  { icon: <FiCloud className="w-3 h-3" />, label: "AWS" },
+                  { icon: <FiServer className="w-3 h-3" />, label: "Node.js" },
                   {
-                    icon: <FiServer className="w-3 h-3" />,
-                    label: "Kubernetes",
+                    icon: <FiCloud className="w-3 h-3" />,
+                    label: "MongoDB",
                   },
-                  { icon: <FiCode className="w-3 h-3" />, label: "CI/CD" },
+                  { icon: <FiCode className="w-3 h-3" />, label: "REST APIs" },
                 ].map((tech, index) => (
                   <motion.span
                     key={tech.label}
@@ -320,25 +320,6 @@ export default function Footer() {
             style={{ color: "var(--text-muted)" }}
           >
             <span>© {currentYear} Abdo Kamal.</span>
-            <span>Built with</span>
-            <motion.div
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <FiHeart className="w-4 h-4 text-red-400" />
-            </motion.div>
-            <span>using Next.js & Tailwind CSS</span>
-          </div>
-
-          <div
-            className="flex items-center gap-6 text-sm"
-            style={{ color: "var(--text-muted)" }}
-          >
-            <span>Made in Egypt 🇪🇬</span>
-            <div className="flex items-center gap-1">
-              <div className="w-1 h-1 bg-blue-400 rounded-full"></div>
-              <span>v2.0.0</span>
-            </div>
           </div>
         </motion.div>
       </div>
