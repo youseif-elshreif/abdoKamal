@@ -1,12 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
 import {
   FiCalendar,
   FiMapPin,
   FiBriefcase,
   FiAward,
   FiTrendingUp,
+  FiClock,
+  FiUsers,
+  FiTarget,
+  FiChevronDown,
+  FiChevronUp,
+  FiExternalLink,
 } from "react-icons/fi";
 import { experiences, type Experience } from "../data/experience";
 import {
@@ -23,10 +30,18 @@ import {
 interface ExperienceCardProps {
   experience: Experience;
   index: number;
+  isExpanded: boolean;
+  onToggle: () => void;
 }
 
-function ExperienceCard({ experience, index }: ExperienceCardProps) {
+function ExperienceCard({
+  experience,
+  index,
+  isExpanded,
+  onToggle,
+}: ExperienceCardProps) {
   const formatDate = (dateString: string) => {
+    if (dateString === "present") return "Present";
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", {
       year: "numeric",
@@ -34,243 +49,362 @@ function ExperienceCard({ experience, index }: ExperienceCardProps) {
     });
   };
 
-  const getTypeVariant = (type: Experience["type"]) => {
+  const getTypeConfig = (type: Experience["type"]) => {
     switch (type) {
       case "full-time":
-        return "success" as const;
+        return {
+          variant: "success" as const,
+          label: "Full-time",
+          icon: FiBriefcase,
+        };
       case "part-time":
-        return "info" as const;
+        return { variant: "info" as const, label: "Part-time", icon: FiClock };
       case "contract":
-        return "warning" as const;
+        return {
+          variant: "warning" as const,
+          label: "Contract",
+          icon: FiUsers,
+        };
       case "internship":
-        return "neutral" as const;
+        return {
+          variant: "info" as const,
+          label: "Internship",
+          icon: FiTarget,
+        };
+      case "training":
+        return {
+          variant: "neutral" as const,
+          label: "Training",
+          icon: FiAward,
+        };
       default:
-        return "neutral" as const;
+        return {
+          variant: "neutral" as const,
+          label: "Other",
+          icon: FiBriefcase,
+        };
     }
+  };
+
+  const typeConfig = getTypeConfig(experience.type);
+  const TypeIcon = typeConfig.icon;
+
+  const calculateDuration = () => {
+    const start = new Date(experience.startDate);
+    const end =
+      experience.endDate === "present"
+        ? new Date()
+        : new Date(experience.endDate!);
+    const months = Math.round(
+      (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24 * 30)
+    );
+
+    if (months < 1) return "Less than 1 month";
+    if (months === 1) return "1 month";
+    if (months < 12) return `${months} months`;
+
+    const years = Math.floor(months / 12);
+    const remainingMonths = months % 12;
+
+    if (years === 1 && remainingMonths === 0) return "1 year";
+    if (years === 1) return `1 year ${remainingMonths} months`;
+    if (remainingMonths === 0) return `${years} years`;
+    return `${years} years ${remainingMonths} months`;
   };
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="group relative"
+      className="relative"
     >
-      {/* Timeline connector */}
-      <div className="absolute -left-6 top-8 flex flex-col items-center">
-        <motion.div
-          initial={{ scale: 0 }}
-          whileInView={{ scale: 1 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ delay: index * 0.1 + 0.3 }}
-          className="w-4 h-4 rounded-full border-2 shadow-lg flex items-center justify-center z-10"
+      {/* Timeline line connector */}
+      {index < experiences.length - 1 && (
+        <div
+          className="absolute left-6 top-20 w-0.5 h-32 opacity-30"
           style={{
-            background: "var(--accent)",
-            borderColor: "var(--primary)",
-            boxShadow: "0 0 20px rgba(59, 130, 246, 0.4)",
+            background:
+              "linear-gradient(to bottom, var(--accent), transparent)",
           }}
-        >
-          <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
-        </motion.div>
-      </div>
+        />
+      )}
 
-      {/* Modern experience card */}
-      <GlassCard className="ml-8 p-6" hoverEffect index={index}>
-        {/* Card header with modern layout */}
-        <div className="mb-6 border-b border-blue-400/10 pb-4">
-          <div className="flex items-start justify-between mb-4">
-            <div className="flex-1">
-              <div className="flex items-center gap-3 mb-2">
-                <AnimatedIcon
-                  variant="rotate"
-                  size="md"
-                  color="accent"
-                  trigger="hover"
-                >
-                  <FiBriefcase />
-                </AnimatedIcon>
-                <div>
-                  <h3
-                    className="text-xl font-bold mb-1 group-hover:text-blue-400 transition-colors duration-300"
-                    style={{ color: "var(--text)" }}
+      {/* Timeline dot */}
+      <motion.div
+        initial={{ scale: 0 }}
+        whileInView={{ scale: 1 }}
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ delay: index * 0.1 + 0.3, type: "spring" }}
+        className="absolute left-4 top-8 w-4 h-4 rounded-full border-2 z-10 flex items-center justify-center"
+        style={{
+          background: "var(--accent)",
+          borderColor: "var(--primary)",
+          boxShadow: "0 0 20px rgba(59, 130, 246, 0.4)",
+        }}
+      >
+        <div className="w-1.5 h-1.5 rounded-full bg-white"></div>
+      </motion.div>
+
+      {/* Experience Card */}
+      <div className="ml-16 mb-8 cursor-pointer" onClick={onToggle}>
+        <GlassCard className="hover:shadow-xl transition-all duration-300">
+          <div className="p-6">
+            {/* Header */}
+            <div className="flex items-start justify-between mb-4">
+              <div className="flex-1">
+                <div className="flex items-center gap-3 mb-2">
+                  <AnimatedIcon
+                    variant="scale"
+                    size="md"
+                    color="accent"
+                    trigger="view"
                   >
-                    {experience.position}
-                  </h3>
-                  <p
-                    className="text-lg font-semibold"
-                    style={{ color: "var(--accent)" }}
-                  >
-                    {experience.company}
-                  </p>
+                    <TypeIcon />
+                  </AnimatedIcon>
+                  <StatusBadge variant={typeConfig.variant} animated={true}>
+                    {typeConfig.label}
+                  </StatusBadge>
+                  {experience.endDate === "present" && (
+                    <StatusBadge variant="success" animated={true}>
+                      Current
+                    </StatusBadge>
+                  )}
                 </div>
-              </div>
-            </div>
 
-            {/* Type badge */}
-            <StatusBadge
-              variant={getTypeVariant(experience.type)}
-              size="md"
-              animated
-            >
-              {experience.type.replace("-", " ").toUpperCase()}
-            </StatusBadge>
-          </div>
+                <h3
+                  className="text-xl font-bold mb-1"
+                  style={{ color: "var(--text)" }}
+                >
+                  {experience.position}
+                </h3>
 
-          {/* Meta information */}
-          <div className="flex flex-wrap items-center gap-6 text-sm">
-            <div
-              className="flex items-center gap-2"
-              style={{ color: "var(--text-muted)" }}
-            >
-              <FiCalendar className="w-4 h-4" />
-              <span>
-                {formatDate(experience.startDate)} -{" "}
-                {experience.endDate
-                  ? formatDate(experience.endDate)
-                  : "Present"}
-              </span>
-            </div>
-            <div
-              className="flex items-center gap-2"
-              style={{ color: "var(--text-muted)" }}
-            >
-              <FiMapPin className="w-4 h-4" />
-              <span>{experience.location}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Card content */}
-        <div className="space-y-6">
-          {/* Description */}
-          <p
-            className="leading-relaxed text-base"
-            style={{ color: "var(--text-secondary)" }}
-          >
-            {experience.description}
-          </p>
-
-          {/* Achievements with modern design */}
-          <div>
-            <h4
-              className="flex items-center gap-2 text-sm font-bold mb-4"
-              style={{ color: "var(--text)" }}
-            >
-              <FiAward className="w-4 h-4" style={{ color: "var(--accent)" }} />
-              Key Achievements
-            </h4>
-            <div className="space-y-3">
-              {experience.achievements.map((achievement, idx) => (
                 <div
-                  key={idx}
-                  className="flex items-start gap-3 p-3 rounded-xl border border-blue-400/10 hover:border-blue-400/25 transition-all duration-300"
-                  style={{ background: "rgba(71, 85, 105, 0.1)" }}
+                  className="text-lg font-semibold mb-3"
+                  style={{ color: "var(--accent)" }}
                 >
-                  <div
-                    className="flex-shrink-0 w-6 h-6 rounded-full border border-blue-400/30 flex items-center justify-center mt-0.5"
-                    style={{ background: "rgba(59, 130, 246, 0.15)" }}
-                  >
-                    <FiTrendingUp
-                      className="w-3 h-3"
-                      style={{ color: "var(--accent)" }}
-                    />
-                  </div>
-                  <span
-                    className="text-sm leading-relaxed flex-1"
-                    style={{ color: "var(--text-secondary)" }}
-                  >
-                    {achievement}
-                  </span>
+                  {experience.company}
                 </div>
-              ))}
-            </div>
-          </div>
 
-          {/* Technologies with improved design */}
-          <div>
-            <h4
-              className="text-sm font-bold mb-4 flex items-center gap-2"
-              style={{ color: "var(--text)" }}
-            >
-              <div
-                className="w-4 h-4 rounded border border-blue-400/30 flex items-center justify-center"
-                style={{ background: "rgba(59, 130, 246, 0.15)" }}
-              >
-                <div className="w-1.5 h-1.5 bg-blue-400 rounded-sm"></div>
+                {/* Meta info */}
+                <div className="flex flex-wrap items-center gap-4 text-sm">
+                  <div className="flex items-center gap-2">
+                    <FiMapPin className="text-blue-400" size={14} />
+                    <span style={{ color: "var(--text-secondary)" }}>
+                      {experience.location}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <FiCalendar className="text-blue-400" size={14} />
+                    <span style={{ color: "var(--text-secondary)" }}>
+                      {formatDate(experience.startDate)} -{" "}
+                      {formatDate(experience.endDate || "present")}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <FiClock className="text-blue-400" size={14} />
+                    <span style={{ color: "var(--text-secondary)" }}>
+                      {calculateDuration()}
+                    </span>
+                  </div>
+                </div>
               </div>
-              Technologies & Tools
-            </h4>
-            <div className="flex flex-wrap gap-2">
-              {experience.technologies.map((tech, techIndex) => (
-                <TechTag
-                  key={tech}
-                  name={tech}
-                  index={techIndex}
-                  variant="primary"
-                  size="sm"
-                />
-              ))}
+
+              {/* Expand/Collapse button */}
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className="p-2 rounded-lg hover:bg-blue-500/10 transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onToggle();
+                }}
+              >
+                {isExpanded ? (
+                  <FiChevronUp className="text-blue-400" size={20} />
+                ) : (
+                  <FiChevronDown className="text-blue-400" size={20} />
+                )}
+              </motion.button>
             </div>
+
+            {/* Description */}
+            <p
+              className="text-sm leading-relaxed mb-4"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              {experience.description}
+            </p>
+
+            {/* Expandable Content */}
+            <motion.div
+              initial={false}
+              animate={{
+                height: isExpanded ? "auto" : 0,
+                opacity: isExpanded ? 1 : 0,
+              }}
+              transition={{ duration: 0.3 }}
+              className="overflow-hidden"
+            >
+              {isExpanded && (
+                <div className="pt-4 border-t border-blue-400/20">
+                  {/* Achievements */}
+                  {experience.achievements &&
+                    experience.achievements.length > 0 && (
+                      <div className="mb-6">
+                        <div className="flex items-center gap-2 mb-3">
+                          <FiAward className="text-blue-400" size={16} />
+                          <h4
+                            className="font-semibold text-sm"
+                            style={{ color: "var(--text)" }}
+                          >
+                            Key Achievements
+                          </h4>
+                        </div>
+                        <div className="space-y-2">
+                          {experience.achievements.map(
+                            (achievement, achIndex) => (
+                              <motion.div
+                                key={achIndex}
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: achIndex * 0.1 }}
+                                className="flex items-start gap-3"
+                              >
+                                <div
+                                  className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0"
+                                  style={{ backgroundColor: "var(--accent)" }}
+                                />
+                                <span
+                                  className="text-sm leading-relaxed"
+                                  style={{ color: "var(--text-secondary)" }}
+                                >
+                                  {achievement}
+                                </span>
+                              </motion.div>
+                            )
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                  {/* Technologies */}
+                  {experience.technologies &&
+                    experience.technologies.length > 0 && (
+                      <div>
+                        <div className="flex items-center gap-2 mb-3">
+                          <FiTrendingUp className="text-blue-400" size={16} />
+                          <h4
+                            className="font-semibold text-sm"
+                            style={{ color: "var(--text)" }}
+                          >
+                            Technologies & Tools
+                          </h4>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          {experience.technologies.map((tech, techIndex) => (
+                            <TechTag
+                              key={tech}
+                              name={tech}
+                              variant="primary"
+                              size="sm"
+                              index={techIndex}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                </div>
+              )}
+            </motion.div>
           </div>
-        </div>
-      </GlassCard>
+        </GlassCard>
+      </div>
     </motion.div>
   );
 }
 
 export default function Experience() {
-  const totalExperience = experiences.length;
-  const currentPositions = experiences.filter((exp) => !exp.endDate).length;
+  const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
+
+  const toggleCard = (experienceId: string) => {
+    setExpandedCards((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(experienceId)) {
+        newSet.delete(experienceId);
+      } else {
+        newSet.add(experienceId);
+      }
+      return newSet;
+    });
+  };
+
+  const totalExperience = experiences.reduce((total, exp) => {
+    const start = new Date(exp.startDate);
+    const end = exp.endDate === "present" ? new Date() : new Date(exp.endDate!);
+    return (
+      total +
+      Math.round((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24 * 30))
+    );
+  }, 0);
+
+  const formatTotalExperience = () => {
+    if (totalExperience < 12) return `${totalExperience} months`;
+    const years = Math.floor(totalExperience / 12);
+    const months = totalExperience % 12;
+    if (months === 0) return `${years}+ years`;
+    return `${years}.${Math.round((months / 12) * 10)} years`;
+  };
+
+  const completedProjects = experiences.reduce(
+    (total, exp) => total + (exp.achievements?.length || 0),
+    0
+  );
+  const uniqueTechnologies = [
+    ...new Set(experiences.flatMap((exp) => exp.technologies || [])),
+  ].length;
 
   return (
-    <SectionWrapper
-      id="experience"
-      backgroundVariant="scattered"
-      gradientDirection="diagonal"
-    >
-      <SectionHeader
-        badge="Professional Journey"
-        title="Work Experience"
-        description="My professional evolution in DevOps and infrastructure engineering, building scalable systems and leading automation initiatives across diverse environments"
-      />
+    <SectionWrapper id="experience" className="py-20">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <SectionHeader
+            badge="Career Journey"
+            title="Professional Experience"
+            description="My journey in DevOps and infrastructure development"
+          />
+        </div>
 
-      {/* Timeline with enhanced design */}
-      <div className="relative mb-16">
-        {/* Main timeline line */}
-        <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-400/60 via-blue-500/40 to-blue-400/60" />
+        {/* Timeline */}
+        <div className="relative">
+          {/* Main timeline line */}
+          <div
+            className="absolute left-6 top-0 w-0.5 opacity-20"
+            style={{
+              height: `${experiences.length * 200}px`,
+              background:
+                "linear-gradient(to bottom, var(--accent), var(--accent-secondary))",
+            }}
+          />
 
-        {/* Experience cards */}
-        <div className="space-y-12">
-          {experiences.map((experience, index) => (
-            <ExperienceCard
-              key={experience.id}
-              experience={experience}
-              index={index}
-            />
-          ))}
+          {/* Experience Cards */}
+          <div className="space-y-0">
+            {experiences.map((experience, index) => (
+              <ExperienceCard
+                key={experience.id}
+                experience={experience}
+                index={index}
+                isExpanded={expandedCards.has(experience.id)}
+                onToggle={() => toggleCard(experience.id)}
+              />
+            ))}
+          </div>
         </div>
       </div>
-
-      {/* Stats footer */}
-      <StatsContainer>
-        <StatCard
-          value={totalExperience}
-          label="Total Positions"
-          color="blue"
-        />
-        <div className="w-px h-8 bg-blue-400/20"></div>
-        <StatCard
-          value={currentPositions}
-          label="Current Roles"
-          color="green"
-          icon={
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-ping"></div>
-          }
-        />
-        <div className="w-px h-8 bg-blue-400/20"></div>
-        <StatCard value="Building" label="Currently" color="purple" />
-      </StatsContainer>
     </SectionWrapper>
   );
 }
