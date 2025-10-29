@@ -104,6 +104,7 @@ function SkillCard({ group, index }: SkillCardProps) {
             key={skill.name}
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
             transition={{ delay: index * 0.1 + skillIndex * 0.05 }}
             className="flex items-center justify-between p-3 rounded-xl hover:bg-blue-500/5 transition-all duration-300"
           >

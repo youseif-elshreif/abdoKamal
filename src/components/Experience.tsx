@@ -62,6 +62,7 @@ function ExperienceCard({ experience, index }: ExperienceCardProps) {
         <motion.div
           initial={{ scale: 0 }}
           whileInView={{ scale: 1 }}
+          viewport={{ once: true, amount: 0.15 }}
           transition={{ delay: index * 0.1 + 0.3 }}
           className="w-4 h-4 rounded-full border-2 shadow-lg flex items-center justify-center z-10"
           style={{

@@ -37,6 +37,7 @@ export default function StatusBadge({
     ? {
         initial: { scale: 0 },
         whileInView: { scale: 1 },
+        viewport: { once: true, amount: 0.15 },
         transition: { type: "spring" as const, stiffness: 300 },
       }
     : {};

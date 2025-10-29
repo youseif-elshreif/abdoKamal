@@ -71,7 +71,7 @@ export default function AnimatedIcon({
     ...(trigger === "view" && {
       initial: { scale: 0, opacity: 0 },
       whileInView: { scale: 1, opacity: 1 },
-      viewport: { once: true },
+      viewport: { once: true, amount: 0.15 },
     }),
     ...(trigger === "hover" && {
       whileHover: getAnimation(),

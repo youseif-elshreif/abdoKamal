@@ -37,6 +37,7 @@ export default function TechTag({
     <Component
       initial={{ opacity: 0, scale: 0.8 }}
       whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true, amount: 0.15 }}
       whileHover={clickable ? { scale: 1.05 } : undefined}
       whileTap={clickable ? { scale: 0.95 } : undefined}
       transition={{ delay: index * 0.03 }}
