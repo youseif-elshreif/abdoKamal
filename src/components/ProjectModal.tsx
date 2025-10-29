@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useEffect } from "react";
-import { FiX, FiGithub, FiExternalLink } from "react-icons/fi";
+import { FiX, FiGithub } from "react-icons/fi";
 import { Project } from "../data/projects";
 
 interface ProjectModalProps {

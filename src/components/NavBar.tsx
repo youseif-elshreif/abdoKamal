@@ -74,106 +74,134 @@ export default function NavBar() {
 
   return (
     <header
-      className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[min(96%,1100px)] rounded-2xl backdrop-blur-md border border-blue-500/20 card-float"
+      className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 w-[min(94%,1200px)]"
       role="banner"
-      style={{
-        background: "var(--surface-glass)",
-        boxShadow:
-          "0 8px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
-      }}
     >
-      <nav
-        className="mx-auto px-4 sm:px-6 lg:px-8"
-        role="navigation"
-        aria-label="Main Navigation"
-      >
-        <div className="flex justify-between items-center h-16 ">
-          {/* Logo */}
+      {/* Modern segmented navbar with floating elements */}
+      <div className="flex items-center justify-between gap-4">
+        {/* Left: Logo section - standalone floating element */}
+        <motion.div
+          className="backdrop-blur-xl rounded-2xl border border-blue-400/30 p-3 transition-all duration-300 hover:border-blue-400/50"
+          style={{
+            background: "rgba(30, 41, 59, 0.95)",
+            boxShadow:
+              "0 8px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.08)",
+          }}
+          whileHover={{ scale: 1.02 }}
+        >
           <button
             onClick={(e) => {
               e.preventDefault();
               scrollToSection("#hero");
             }}
-            className="cursor-pointer flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-md"
+            className="cursor-pointer flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/50 rounded-lg p-1 transition-all duration-200"
             aria-label="Go to home"
           >
-            <motion.div
-              whileHover={{ scale: 1.03 }}
-              transition={{ duration: 0.15 }}
-              className="flex items-center gap-3"
-            >
-              <span
-                className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold shadow-lg border border-blue-400/30"
+            <div className="flex items-center gap-3">
+              <div
+                className="relative w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 flex items-center justify-center font-bold text-white shadow-lg border border-blue-400/30"
                 style={{
                   boxShadow:
-                    "0 4px 15px rgba(59, 130, 246, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
+                    "0 4px 15px rgba(59, 130, 246, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
                 }}
               >
                 MM
-              </span>
-              <div className="sm:block text-sm flex flex-col text-left">
-                <div className="font-semibold" style={{ color: "var(--text)" }}>
+                {/* Glow effect */}
+                <div className="absolute inset-0 rounded-xl bg-blue-400/20 blur-xl scale-110 -z-10"></div>
+              </div>
+              <div className="hidden sm:flex flex-col text-left">
+                <div
+                  className="font-bold text-sm leading-tight"
+                  style={{ color: "var(--text)" }}
+                >
                   Mohamed Moustafa
                 </div>
                 <div
-                  className="text-xs -mt-0.5"
-                  style={{ color: "var(--text-muted)" }}
+                  className="text-xs leading-tight"
+                  style={{ color: "var(--accent)" }}
                 >
                   DevOps Engineer
                 </div>
               </div>
-            </motion.div>
+            </div>
           </button>
+        </motion.div>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center space-x-1">
-            {navItems.map((item) => {
-              const isActive = activeSection === item.href.slice(1);
-              return (
-                <button
-                  key={item.href}
-                  onClick={() => scrollToSection(item.href)}
-                  className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/50 ${
-                    isActive
-                      ? "bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-lg border border-blue-400/30"
-                      : "hover:bg-blue-500/10 border border-transparent hover:border-blue-400/20"
-                  } cursor-pointer`}
-                  style={{
-                    color: isActive ? "white" : "var(--text-secondary)",
-                    boxShadow: isActive
-                      ? "0 4px 15px rgba(59, 130, 246, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)"
-                      : "none",
-                  }}
-                  aria-current={isActive ? "page" : undefined}
-                >
-                  {item.label}
-                  {/* active underline (subtle) */}
-                  <span
-                    className={`absolute left-2 right-2 -bottom-2 h-1 rounded-full transition-all duration-300 ${
-                      isActive
-                        ? "bg-gradient-to-r from-blue-400 to-blue-500 opacity-90"
-                        : "bg-transparent"
-                    }`}
-                    aria-hidden
+        {/* Center: Navigation links - separate floating capsules */}
+        <div className="hidden md:flex items-center gap-2">
+          {navItems.map((item) => {
+            const isActive = activeSection === item.href.slice(1);
+            return (
+              <motion.button
+                key={item.href}
+                onClick={() => scrollToSection(item.href)}
+                className={`relative px-5 py-3 rounded-xl text-sm font-medium transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/50 border cursor-pointer group ${
+                  isActive
+                    ? "border-blue-400/60"
+                    : "border-blue-400/20 hover:border-blue-400/40"
+                }`}
+                style={{
+                  background: isActive
+                    ? "linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(29, 78, 216, 0.15))"
+                    : "rgba(30, 41, 59, 0.8)",
+                  color: isActive ? "var(--accent)" : "var(--text-secondary)",
+                  backdropFilter: "blur(16px)",
+                  boxShadow: isActive
+                    ? "0 4px 20px rgba(59, 130, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)"
+                    : "0 4px 15px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
+                }}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                aria-current={isActive ? "page" : undefined}
+              >
+                {item.label}
+
+                {/* Active indicator - floating dot */}
+                {isActive && (
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-blue-400 shadow-lg"
+                    style={{
+                      boxShadow: "0 0 8px rgba(59, 130, 246, 0.8)",
+                    }}
                   />
-                </button>
-              );
-            })}
-          </div>
+                )}
 
-          {/* Mobile menu button */}
+                {/* Hover glow effect */}
+                <div className="absolute inset-0 rounded-xl bg-blue-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+              </motion.button>
+            );
+          })}
+        </div>
+
+        {/* Right: Mobile menu - compact floating button */}
+        <motion.div
+          className="md:hidden backdrop-blur-xl rounded-2xl border border-blue-400/30 transition-all duration-300 hover:border-blue-400/50"
+          style={{
+            background: "rgba(30, 41, 59, 0.95)",
+            boxShadow:
+              "0 8px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.08)",
+          }}
+          whileHover={{ scale: 1.02 }}
+        >
           <button
-            className="md:hidden p-2 rounded-md hover:bg-blue-500/10 border border-transparent hover:border-blue-400/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/50 transition-all duration-200"
+            className="p-3 rounded-xl transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/50"
             onClick={() => setIsOpen((s) => !s)}
             aria-label="Toggle menu"
             aria-expanded={isOpen}
             style={{ color: "var(--text-secondary)" }}
           >
-            <svg
+            <motion.svg
               className="w-6 h-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              animate={isOpen ? "open" : "closed"}
+              variants={{
+                open: { rotate: 45 },
+                closed: { rotate: 0 },
+              }}
             >
               {isOpen ? (
                 <path
@@ -190,67 +218,97 @@ export default function NavBar() {
                   d="M4 6h16M4 12h16M4 18h16"
                 />
               )}
-            </svg>
+            </motion.svg>
           </button>
-        </div>
+        </motion.div>
+      </div>
 
-        {/* Mobile Navigation */}
-        <motion.div
-          initial={{ height: 0, opacity: 0 }}
-          animate={{
-            height: isOpen ? "auto" : 0,
-            opacity: isOpen ? 1 : 0,
-          }}
-          transition={{ duration: 0.28 }}
-          className="md:hidden overflow-hidden backdrop-blur-sm border-t border-blue-400/20"
-          style={{ background: "var(--surface-glass)" }}
-        >
-          <div className="px-4 pt-4 pb-6 space-y-2">
-            {navItems.map((item) => {
-              const isActive = activeSection === item.href.slice(1);
-              return (
-                <button
-                  key={item.href}
-                  onClick={() => scrollToSection(item.href)}
-                  className={`block w-full text-left px-4 py-3 text-base font-medium rounded-lg transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/50 ${
-                    isActive
-                      ? "bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-lg border border-blue-400/30"
-                      : "hover:bg-blue-500/10 border border-transparent hover:border-blue-400/20"
-                  } cursor-pointer`}
-                  style={{
-                    color: isActive ? "white" : "var(--text-secondary)",
-                    boxShadow: isActive
-                      ? "0 4px 15px rgba(59, 130, 246, 0.4)"
-                      : "none",
-                  }}
-                  aria-current={isActive ? "page" : undefined}
-                >
+      {/* Mobile Navigation - redesigned floating panel */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95, y: -20 }}
+        animate={{
+          opacity: isOpen ? 1 : 0,
+          scale: isOpen ? 1 : 0.95,
+          y: isOpen ? 0 : -20,
+        }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        className={`md:hidden mt-4 backdrop-blur-xl rounded-2xl border border-blue-400/30 overflow-hidden ${
+          isOpen ? "pointer-events-auto" : "pointer-events-none"
+        }`}
+        style={{
+          background: "rgba(30, 41, 59, 0.95)",
+          boxShadow:
+            "0 12px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(59, 130, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+        }}
+      >
+        <div className="p-6 space-y-3">
+          {navItems.map((item, index) => {
+            const isActive = activeSection === item.href.slice(1);
+            return (
+              <motion.button
+                key={item.href}
+                onClick={() => scrollToSection(item.href)}
+                className={`block w-full text-left px-4 py-3 text-base font-medium rounded-xl transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/50 border cursor-pointer ${
+                  isActive
+                    ? "border-blue-400/60"
+                    : "border-blue-400/20 hover:border-blue-400/40"
+                }`}
+                style={{
+                  background: isActive
+                    ? "linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(29, 78, 216, 0.15))"
+                    : "rgba(51, 65, 85, 0.6)",
+                  color: isActive ? "var(--accent)" : "var(--text-secondary)",
+                  boxShadow: isActive
+                    ? "0 4px 15px rgba(59, 130, 246, 0.4)"
+                    : "0 2px 8px rgba(0, 0, 0, 0.2)",
+                }}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{
+                  opacity: isOpen ? 1 : 0,
+                  x: isOpen ? 0 : -20,
+                }}
+                transition={{
+                  delay: isOpen ? index * 0.05 : 0,
+                  duration: 0.3,
+                }}
+                aria-current={isActive ? "page" : undefined}
+              >
+                <div className="flex items-center justify-between">
                   {item.label}
-                </button>
-              );
-            })}
-            {/* small socials row (optional) */}
-            <div className="pt-2 border-t border-blue-400/20 mt-2 flex items-center gap-3">
+                  {isActive && (
+                    <div
+                      className="w-2 h-2 rounded-full bg-blue-400"
+                      style={{
+                        boxShadow: "0 0 6px rgba(59, 130, 246, 0.8)",
+                      }}
+                    />
+                  )}
+                </div>
+              </motion.button>
+            );
+          })}
+
+          {/* Social links in mobile menu - redesigned */}
+          <div className="pt-4 border-t border-blue-400/20 mt-4">
+            <div className="flex items-center justify-center gap-4">
               <Link
                 href="https://github.com/mhmdmstfa2010"
-                onClick={(e) => e}
-                className="text-sm transition-colors duration-200 hover:text-blue-400"
+                className="px-4 py-2 text-sm transition-colors duration-200 rounded-lg border border-blue-400/20 hover:border-blue-400/40 hover:bg-blue-500/10"
                 style={{ color: "var(--text-muted)" }}
               >
                 GitHub
               </Link>
               <Link
                 href="https://www.linkedin.com/in/mohamed-moustafa20/"
-                onClick={(e) => e}
-                className="text-sm transition-colors duration-200 hover:text-blue-400"
+                className="px-4 py-2 text-sm transition-colors duration-200 rounded-lg border border-blue-400/20 hover:border-blue-400/40 hover:bg-blue-500/10"
                 style={{ color: "var(--text-muted)" }}
               >
                 LinkedIn
               </Link>
             </div>
           </div>
-        </motion.div>
-      </nav>
+        </div>
+      </motion.div>
     </header>
   );
 }
