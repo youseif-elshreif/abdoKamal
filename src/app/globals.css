@@ -1,0 +1,161 @@
+@import "tailwindcss";
+
+:root {
+  --background: #1e293b; /* Primary dark background */
+  --foreground: #f8fafc; /* Light text */
+
+  /* Modern dark theme with blue accents */
+  --primary: #1e293b; /* Primary background */
+  --secondary: #334155; /* Secondary surfaces */
+  --accent: #3b82f6; /* Bright blue accent */
+  --accent-light: #60a5fa; /* Light blue for hover states */
+  --accent-dark: #1d4ed8; /* Dark blue for contrast */
+
+  --surface: #334155; /* Card backgrounds */
+  --surface-elevated: #475569; /* Elevated surfaces */
+  --surface-glass: rgba(51, 65, 85, 0.8); /* Glass effect surfaces */
+
+  --text: #f8fafc; /* Primary text - light */
+  --text-secondary: #cbd5e1; /* Secondary text */
+  --text-muted: #94a3b8; /* Muted text */
+
+  --border: #475569; /* Border color */
+  --border-light: #64748b; /* Light border */
+
+  /* Blue gradient variations */
+  --gradient-blue: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  --gradient-blue-light: linear-gradient(135deg, #60a5fa, #3b82f6);
+  --gradient-surface: linear-gradient(135deg, #334155, #475569);
+}
+
+/* Dark mode is now the default - keeping consistent theme */
+@media (prefers-color-scheme: light) {
+  :root {
+    /* Override for users who prefer light mode */
+    --background: #1e293b;
+    --foreground: #f8fafc;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
+  /* Add subtle texture */
+  background-image: radial-gradient(
+      circle at 20% 80%,
+      rgba(59, 130, 246, 0.05) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(29, 78, 216, 0.05) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 40% 40%,
+      rgba(59, 130, 246, 0.03) 0%,
+      transparent 50%
+    );
+}
+
+/* Custom utilities for dark floating panels */
+.card-float {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(59, 130, 246, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  background: var(--surface-glass);
+  backdrop-filter: blur(16px);
+}
+
+.card-float-elevated {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-radius: 1.25rem;
+  background: var(--surface-elevated);
+}
+
+.accent-rot {
+  transform: rotate(0.75deg);
+}
+
+/* Performance-optimized CSS animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes gentleHover {
+  to {
+    transform: scale(1.02);
+  }
+}
+
+/* CSS-only hover effects للأجهزة الضعيفة */
+.fallback-hover {
+  transition: transform 0.15s ease-out;
+}
+
+.fallback-hover:hover {
+  transform: scale(1.02);
+}
+
+/* تحسين performance لـ scroll */
+* {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* تقليل repaints */
+.gpu-accelerated {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 3px;
+  border: 2px solid var(--primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-light);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--primary);
+}
