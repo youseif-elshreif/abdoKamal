@@ -123,7 +123,7 @@ function ExperienceCard({
       {/* Timeline line connector */}
       {index < experiences.length - 1 && (
         <div
-          className="absolute left-6 top-20 w-0.5 h-32 opacity-30"
+          className="absolute left-4 sm:left-6 top-20 w-0.5 h-32 opacity-30"
           style={{
             background:
               "linear-gradient(to bottom, var(--accent), transparent)",
@@ -137,24 +137,24 @@ function ExperienceCard({
         whileInView={{ scale: 1 }}
         viewport={{ once: true, amount: 0.15 }}
         transition={{ delay: index * 0.1 + 0.3, type: "spring" }}
-        className="absolute left-4 top-8 w-4 h-4 rounded-full border-2 z-10 flex items-center justify-center"
+        className="absolute left-2 sm:left-4 top-6 sm:top-8 w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 z-10 flex items-center justify-center"
         style={{
           background: "var(--accent)",
           borderColor: "var(--primary)",
           boxShadow: "0 0 20px rgba(59, 130, 246, 0.4)",
         }}
       >
-        <div className="w-1.5 h-1.5 rounded-full bg-white"></div>
+        <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-white"></div>
       </motion.div>
 
       {/* Experience Card */}
-      <div className="ml-16 mb-8 cursor-pointer" onClick={onToggle}>
+      <div className="ml-8 sm:ml-16 mb-6 sm:mb-8 cursor-pointer" onClick={onToggle}>
         <GlassCard className="hover:shadow-xl transition-all duration-300">
-          <div className="p-6">
+          <div className="p-4 sm:p-6">
             {/* Header */}
-            <div className="flex items-start justify-between mb-4">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4 gap-3 sm:gap-0">
               <div className="flex-1">
-                <div className="flex items-center gap-3 mb-2">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-2">
                   <AnimatedIcon
                     variant="scale"
                     size="md"
@@ -174,30 +174,30 @@ function ExperienceCard({
                 </div>
 
                 <h3
-                  className="text-xl font-bold mb-1"
+                  className="text-lg sm:text-xl font-bold mb-1"
                   style={{ color: "var(--text)" }}
                 >
                   {experience.position}
                 </h3>
 
                 <div
-                  className="text-lg font-semibold mb-3"
+                  className="text-base sm:text-lg font-semibold mb-3"
                   style={{ color: "var(--accent)" }}
                 >
                   {experience.company}
                 </div>
 
                 {/* Meta info */}
-                <div className="flex flex-wrap items-center gap-4 text-sm">
+                <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-2 sm:gap-4 text-xs sm:text-sm">
                   <div className="flex items-center gap-2">
-                    <FiMapPin className="text-blue-400" size={14} />
+                    <FiMapPin className="text-blue-400" size={12} />
                     <span style={{ color: "var(--text-secondary)" }}>
                       {experience.location}
                     </span>
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <FiCalendar className="text-blue-400" size={14} />
+                    <FiCalendar className="text-blue-400" size={12} />
                     <span style={{ color: "var(--text-secondary)" }}>
                       {formatDate(experience.startDate)} -{" "}
                       {formatDate(experience.endDate || "present")}
@@ -205,7 +205,7 @@ function ExperienceCard({
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <FiClock className="text-blue-400" size={14} />
+                    <FiClock className="text-blue-400" size={12} />
                     <span style={{ color: "var(--text-secondary)" }}>
                       {calculateDuration()}
                     </span>
@@ -217,23 +217,23 @@ function ExperienceCard({
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="p-2 rounded-lg hover:bg-blue-500/10 transition-colors"
+                className="p-2 rounded-lg hover:bg-blue-500/10 transition-colors self-start sm:self-auto"
                 onClick={(e) => {
                   e.stopPropagation();
                   onToggle();
                 }}
               >
                 {isExpanded ? (
-                  <FiChevronUp className="text-blue-400" size={20} />
+                  <FiChevronUp className="text-blue-400" size={18} />
                 ) : (
-                  <FiChevronDown className="text-blue-400" size={20} />
+                  <FiChevronDown className="text-blue-400" size={18} />
                 )}
               </motion.button>
             </div>
 
             {/* Description */}
             <p
-              className="text-sm leading-relaxed mb-4"
+              className="text-xs sm:text-sm leading-relaxed mb-4"
               style={{ color: "var(--text-secondary)" }}
             >
               {experience.description}
@@ -256,9 +256,9 @@ function ExperienceCard({
                     experience.achievements.length > 0 && (
                       <div className="mb-6">
                         <div className="flex items-center gap-2 mb-3">
-                          <FiAward className="text-blue-400" size={16} />
+                          <FiAward className="text-blue-400" size={14} />
                           <h4
-                            className="font-semibold text-sm"
+                            className="font-semibold text-xs sm:text-sm"
                             style={{ color: "var(--text)" }}
                           >
                             Key Achievements
@@ -279,7 +279,7 @@ function ExperienceCard({
                                   style={{ backgroundColor: "var(--accent)" }}
                                 />
                                 <span
-                                  className="text-sm leading-relaxed"
+                                  className="text-xs sm:text-sm leading-relaxed"
                                   style={{ color: "var(--text-secondary)" }}
                                 >
                                   {achievement}
@@ -296,15 +296,15 @@ function ExperienceCard({
                     experience.technologies.length > 0 && (
                       <div>
                         <div className="flex items-center gap-2 mb-3">
-                          <FiTrendingUp className="text-blue-400" size={16} />
+                          <FiTrendingUp className="text-blue-400" size={14} />
                           <h4
-                            className="font-semibold text-sm"
+                            className="font-semibold text-xs sm:text-sm"
                             style={{ color: "var(--text)" }}
                           >
                             Technologies & Tools
                           </h4>
                         </div>
-                        <div className="flex flex-wrap gap-2">
+                        <div className="flex flex-wrap gap-1 sm:gap-2">
                           {experience.technologies.map((tech, techIndex) => (
                             <TechTag
                               key={tech}
@@ -368,10 +368,10 @@ export default function Experience() {
   ].length;
 
   return (
-    <SectionWrapper id="experience" className="py-20">
+    <SectionWrapper id="experience" className="py-12 sm:py-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 sm:mb-16">
           <SectionHeader
             badge="Career Journey"
             title="Professional Experience"
@@ -383,9 +383,9 @@ export default function Experience() {
         <div className="relative">
           {/* Main timeline line */}
           <div
-            className="absolute left-6 top-0 w-0.5 opacity-20"
+            className="absolute left-4 sm:left-6 top-0 w-0.5 opacity-20"
             style={{
-              height: `${experiences.length * 200}px`,
+              height: `${experiences.length * 150}px`,
               background:
                 "linear-gradient(to bottom, var(--accent), var(--accent-secondary))",
             }}
