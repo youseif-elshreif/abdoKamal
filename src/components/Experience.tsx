@@ -22,8 +22,6 @@ import {
   GlassCard,
   AnimatedIcon,
   StatusBadge,
-  StatsContainer,
-  StatCard,
   TechTag,
 } from "./shared";
 
@@ -148,7 +146,10 @@ function ExperienceCard({
       </motion.div>
 
       {/* Experience Card */}
-      <div className="ml-8 sm:ml-16 mb-6 sm:mb-8 cursor-pointer" onClick={onToggle}>
+      <div
+        className="ml-8 sm:ml-16 mb-6 sm:mb-8 cursor-pointer"
+        onClick={onToggle}
+      >
         <GlassCard className="hover:shadow-xl transition-all duration-300">
           <div className="p-4 sm:p-6">
             {/* Header */}

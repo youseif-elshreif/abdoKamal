@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { projects } from "../data/projects";
 import ProjectCard from "./ProjectCard";
+import { BackgroundElements } from "./shared";
 
 interface ProjectsGridProps {
   onOpenModal: (projectId: string) => void;
@@ -19,10 +20,8 @@ export default function ProjectsGrid({ onOpenModal }: ProjectsGridProps) {
       }}
     >
       {/* Background pattern */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-400/5 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-blue-600/5 rounded-full blur-3xl"></div>
+      <div className="opacity-30">
+        <BackgroundElements variant="scattered" />
       </div>
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div

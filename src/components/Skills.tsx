@@ -17,8 +17,6 @@ import {
   GlassCard,
   AnimatedIcon,
   StatusBadge,
-  StatsContainer,
-  StatCard,
 } from "./shared";
 
 interface Skill {
@@ -171,22 +169,6 @@ export default function Skills() {
           <SkillCard key={group.title} group={group} index={index} />
         ))}
       </div>
-
-      {/* Stats footer */}
-      <StatsContainer>
-        <StatCard value={totalSkills} label="Total Skills" color="blue" />
-        <div className="w-px h-8 bg-blue-400/20"></div>
-        <StatCard value={expertSkills} label="Expert Level" color="green" />
-        <div className="w-px h-8 bg-blue-400/20"></div>
-        <StatCard
-          value="Active"
-          label="Learning Status"
-          color="purple"
-          icon={
-            <div className="w-2 h-2 bg-purple-400 rounded-full animate-ping"></div>
-          }
-        />
-      </StatsContainer>
     </SectionWrapper>
   );
 }

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { FiDownload, FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
 import pic from "../../public/images/me.jpg";
 import { OptimizedSection } from "./OptimizedMotion";
+import { BackgroundElements } from "./shared";
 
 export default function Hero() {
   return (
@@ -13,8 +14,7 @@ export default function Hero() {
     >
       {/* Background gradient overlays */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-blue-600/10"></div>
-      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-blue-400/5 rounded-full blur-3xl"></div>
+      <BackgroundElements variant="default" />
 
       <div className="max-w-7xl mx-auto w-full relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">

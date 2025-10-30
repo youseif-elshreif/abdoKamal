@@ -6,6 +6,5 @@ export { default as StatusBadge } from "./StatusBadge";
 export { default as SectionWrapper } from "./SectionWrapper";
 export { default as AnimatedIcon } from "./AnimatedIcon";
 export { default as StatCard } from "./StatCard";
-export { default as StatsContainer } from "./StatsContainer";
 export { default as TechTag } from "./TechTag";
 export { default as SectionDivider } from "./SectionDivider";

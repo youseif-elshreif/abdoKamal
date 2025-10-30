@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FiAward, FiCalendar, FiBookOpen, FiTrendingUp } from "react-icons/fi";
+import { FiAward, FiCalendar, FiTrendingUp } from "react-icons/fi";
 import { certificates, type Certificate } from "../data/certificates";
 import { useState } from "react";
 import Image from "next/image";
@@ -10,8 +10,6 @@ import {
   SectionHeader,
   GlassCard,
   AnimatedIcon,
-  StatsContainer,
-  StatCard,
 } from "./shared";
 
 interface CertificateCardProps {
@@ -158,15 +156,6 @@ export default function CertificatesGrid() {
       return a.issuer.localeCompare(b.issuer);
     }
   });
-
-  const recentCertificates = certificates.filter((cert) => {
-    const date = new Date(cert.issueDate);
-    const today = new Date();
-    return (today.getTime() - date.getTime()) / (1000 * 3600 * 24) <= 365;
-  }).length;
-
-  const uniqueProviders = new Set(certificates.map((c) => c.issuer)).size;
-
   return (
     <SectionWrapper id="certificates" backgroundVariant="scattered">
       <SectionHeader
@@ -232,23 +221,6 @@ export default function CertificatesGrid() {
           </motion.div>
         ))}
       </motion.div>
-
-      {/* Statistics footer */}
-      <StatsContainer>
-        <StatCard
-          value={certificates.length}
-          label="Total Certificates"
-          color="blue"
-        />
-        <div className="w-px h-8 bg-blue-400/20"></div>
-        <StatCard
-          value={recentCertificates}
-          label="Earned This Year"
-          color="green"
-        />
-        <div className="w-px h-8 bg-blue-400/20"></div>
-        <StatCard value={uniqueProviders} label="Providers" color="purple" />
-      </StatsContainer>
     </SectionWrapper>
   );
 }

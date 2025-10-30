@@ -557,7 +557,7 @@ function MobileFloatingContact() {
   ];
 
   return (
-    <div className="fixed bottom-12 left-6 z-50 lg:hidden" ref={wrapperRef}>
+    <div className="fixed bottom-6 left-6 z-50 lg:hidden" ref={wrapperRef}>
       {/* Main Circle Button */}
       <motion.button
         className="w-14 h-14 rounded-full border backdrop-blur border-blue-400/20 flex items-center justify-center shadow-lg hover:scale-110 transition-all duration-300"

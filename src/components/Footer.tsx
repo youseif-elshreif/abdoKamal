@@ -12,6 +12,7 @@ import {
   FiServer,
   FiCloud,
 } from "react-icons/fi";
+import { BackgroundElements } from "./shared";
 
 interface SocialLink {
   id: string;
@@ -96,10 +97,7 @@ export default function Footer() {
       }}
     >
       {/* Enhanced background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-blue-400/3 rounded-full blur-3xl"></div>
-      </div>
+      <BackgroundElements variant="minimal" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Main footer content */}
