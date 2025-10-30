@@ -74,7 +74,7 @@ export default function NavBar() {
 
   return (
     <header
-      className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 w-[min(94%,1200px)]"
+      className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 w-[min(94%,1200px)] h-[77.6px]"
       role="banner"
     >
       {/* Modern segmented navbar with floating elements */}
@@ -197,11 +197,6 @@ export default function NavBar() {
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
-              animate={isOpen ? "open" : "closed"}
-              variants={{
-                open: { rotate: 45 },
-                closed: { rotate: 0 },
-              }}
             >
               {isOpen ? (
                 <path

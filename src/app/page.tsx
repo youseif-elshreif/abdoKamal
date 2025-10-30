@@ -9,6 +9,7 @@ import CertificatesGrid from "../components/CertificatesGrid";
 import Footer from "../components/Footer";
 import Contact from "@/components/Contact";
 import ProjectModal from "../components/ProjectModal";
+import { SectionDivider } from "../components/shared";
 import { useState } from "react";
 import { projects, Project } from "../data/projects";
 
@@ -33,10 +34,15 @@ export default function Home() {
       <NavBar />
       <main>
         <Hero />
+        <SectionDivider />
         <Skills />
+        <SectionDivider />
         <Experience />
+        <SectionDivider />
         <ProjectsGrid onOpenModal={handleOpenModal} />
+        <SectionDivider />
         <CertificatesGrid />
+        <SectionDivider />
         <Contact />
       </main>
       <Footer />

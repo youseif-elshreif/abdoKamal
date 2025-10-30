@@ -9,7 +9,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="min-h-screen flex items-center justify-center pt-24 px-4 sm:px-6 lg:px-8 overflow-hidden relative"
+      className="min-h-screen flex items-center justify-center pt-30 md:pt-22 pb-10 px-4 sm:px-6 lg:px-8 overflow-hidden relative"
     >
       {/* Background gradient overlays */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-blue-600/10"></div>

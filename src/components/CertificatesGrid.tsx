@@ -1,13 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  FiAward,
-  FiCalendar,
-  FiBookOpen,
-  FiTrendingUp,
-  FiStar,
-} from "react-icons/fi";
+import { FiAward, FiCalendar, FiBookOpen, FiTrendingUp } from "react-icons/fi";
 import { certificates, type Certificate } from "../data/certificates";
 import { useState } from "react";
 import Image from "next/image";
@@ -16,7 +10,6 @@ import {
   SectionHeader,
   GlassCard,
   AnimatedIcon,
-  StatusBadge,
   StatsContainer,
   StatCard,
 } from "./shared";
@@ -29,16 +22,11 @@ interface CertificateCardProps {
 function CertificateCard({ certificate, index }: CertificateCardProps) {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    const today = new Date();
-    const isRecent =
-      (today.getTime() - date.getTime()) / (1000 * 3600 * 24) <= 365;
-
     return {
       formatted: date.toLocaleDateString("en-US", {
         year: "numeric",
         month: "long",
       }),
-      isRecent,
     };
   };
 
@@ -50,16 +38,6 @@ function CertificateCard({ certificate, index }: CertificateCardProps) {
       hoverEffect
       index={index}
     >
-      {/* Recent badge */}
-      {dateInfo.isRecent && (
-        <div className="absolute -top-2 -right-2 z-20">
-          <StatusBadge variant="success" size="sm" animated>
-            <FiStar className="w-3 h-3" />
-            NEW
-          </StatusBadge>
-        </div>
-      )}
-
       {/* Certificate image section */}
       <div className="relative h-48 mb-6 rounded-t-[24px] overflow-hidden bg-gradient-to-br from-blue-500/10 to-blue-600/20">
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent z-10"></div>
@@ -164,24 +142,6 @@ function CertificateCard({ certificate, index }: CertificateCardProps) {
               </>
             )}
           </div>
-        </div>
-
-        {/* Action button */}
-        <div className="mt-auto">
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-medium transition-all duration-300 border shadow-md hover:shadow-lg"
-            style={{
-              background: "rgba(59, 130, 246, 0.15)",
-              color: "var(--accent)",
-              borderColor: "rgba(59, 130, 246, 0.3)",
-              boxShadow: "0 2px 8px rgba(59, 130, 246, 0.1)",
-            }}
-          >
-            <FiBookOpen className="w-4 h-4" />
-            <span className="text-sm">View Certificate</span>
-          </motion.button>
         </div>
       </div>
     </GlassCard>

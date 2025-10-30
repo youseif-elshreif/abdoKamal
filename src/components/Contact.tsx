@@ -14,7 +14,7 @@ import {
   FiClock,
   FiExternalLink,
 } from "react-icons/fi";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   SectionWrapper,
   SectionHeader,
@@ -507,81 +507,118 @@ function ContactMethods() {
 
 // Mobile Floating Contact Component
 function MobileFloatingContact() {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
-  const floatingButtons = [
+  const toggleMenu = () => setIsOpen(!isOpen);
+
+  const handleLinkClick = (href: string) => {
+    window.open(href, "_blank", "noopener,noreferrer");
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        isOpen &&
+        wrapperRef.current &&
+        !wrapperRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
+
+  const contacts = [
     {
-      id: "email",
-      icon: <FiMail className="w-5 h-5" />,
-      href: "mailto:abdokamal.dev@gmail.com",
-      label: "Email",
-      color: "bg-blue-500",
-    },
-    {
-      id: "phone",
-      icon: <FiPhone className="w-5 h-5" />,
-      href: "tel:+201001234567",
-      label: "Phone",
-      color: "bg-green-500",
-    },
-    {
-      id: "linkedin",
-      icon: <FiLinkedin className="w-5 h-5" />,
+      icon: <FiLinkedin size={16} />,
       href: "https://linkedin.com/in/abdo-kamal",
-      label: "LinkedIn",
-      color: "bg-blue-600",
+      transform: "translate(-5px, -50px)",
+    },
+    {
+      icon: <FiGithub size={16} />,
+      href: "https://github.com/abdokamal",
+      transform: "translate(25px, -45px)",
+    },
+    {
+      icon: <FiMail size={16} />,
+      href: "mailto:abdokamal.dev@gmail.com",
+      transform: "translate(50px, -25px)",
+    },
+    {
+      icon: <FiPhone size={16} />,
+      href: "tel:+201001234567",
+      transform: "translate(55px, 5px)",
     },
   ];
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 lg:hidden">
-      <AnimatePresence>
-        {isExpanded && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            className="space-y-3 mb-3"
-          >
-            {floatingButtons.map((button, index) => (
-              <motion.a
-                key={button.id}
-                href={button.href}
-                target={button.id === "linkedin" ? "_blank" : undefined}
-                rel={
-                  button.id === "linkedin" ? "noopener noreferrer" : undefined
-                }
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                transition={{ delay: index * 0.1 }}
-                className={`
-                  flex items-center gap-3 px-4 py-3 ${button.color} text-white rounded-full shadow-lg
-                  hover:shadow-xl transform hover:scale-105 transition-all duration-300
-                `}
-              >
-                {button.icon}
-                <span className="text-sm font-medium">{button.label}</span>
-              </motion.a>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Toggle Button */}
+    <div className="fixed bottom-12 left-6 z-50 lg:hidden" ref={wrapperRef}>
+      {/* Main Circle Button */}
       <motion.button
-        onClick={() => setIsExpanded(!isExpanded)}
+        className="w-14 h-14 rounded-full border backdrop-blur border-blue-400/20 flex items-center justify-center shadow-lg hover:scale-110 transition-all duration-300"
+        onClick={toggleMenu}
+        aria-label="Contact Me"
         whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        className="w-14 h-14 bg-blue-500 text-white rounded-full shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300"
+        whileTap={{ scale: 0.95 }}
+        style={{
+          background:
+            "linear-gradient(145deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 100%)",
+          borderColor: "rgba(59, 130, 246, 0.2)",
+          color: "var(--text-secondary)",
+          boxShadow:
+            "0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 0.1em rgba(59, 130, 246, 0.1) inset",
+        }}
       >
         <motion.div
-          animate={{ rotate: isExpanded ? 45 : 0 }}
+          animate={{ rotate: isOpen ? 45 : 0 }}
           transition={{ duration: 0.3 }}
         >
-          <FiMessageCircle className="w-6 h-6" />
+          <FiMessageCircle size={18} />
         </motion.div>
       </motion.button>
+
+      {/* Radial Icons */}
+      <div className="relative top-[-50px] left-[10px]">
+        {contacts.map((item, i) => (
+          <motion.button
+            key={i}
+            onClick={() => handleLinkClick(item.href)}
+            className={`absolute z-[-1] w-10 h-10 rounded-full border flex items-center justify-center shadow-lg transition-all duration-300 ease-out hover:scale-110 ${
+              isOpen ? "scale-100 opacity-100" : "scale-0 opacity-0"
+            }`}
+            style={{
+              background:
+                "linear-gradient(145deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 100%)",
+              borderColor: "rgba(59, 130, 246, 0.2)",
+              color: "var(--text-secondary)",
+              boxShadow:
+                "0 4px 16px rgba(0, 0, 0, 0.2), 0 0 0 0.1em rgba(59, 130, 246, 0.1) inset",
+              transform: isOpen
+                ? `${item.transform} scale(1)`
+                : "translate(0, 0) scale(0)",
+              transitionDelay: `${i * 80}ms`,
+            }}
+            aria-label={`Contact icon ${i}`}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor =
+                "rgba(59, 130, 246, 0.15)";
+              e.currentTarget.style.borderColor = "rgba(59, 130, 246, 0.4)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background =
+                "linear-gradient(145deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 100%)";
+              e.currentTarget.style.borderColor = "rgba(59, 130, 246, 0.2)";
+            }}
+          >
+            {item.icon}
+          </motion.button>
+        ))}
+      </div>
     </div>
   );
 }
