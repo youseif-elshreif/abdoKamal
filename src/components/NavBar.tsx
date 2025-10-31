@@ -81,7 +81,7 @@ export default function NavBar() {
       <div className="flex items-center justify-between gap-4">
         {/* Left: Logo section - standalone floating element */}
         <motion.div
-          className="backdrop-blur-xl rounded-2xl border border-blue-400/30 p-3 transition-all duration-300 hover:border-blue-400/50"
+          className="glass-nav rounded-2xl border border-blue-400/30 p-3 transition-all duration-300 hover:border-blue-400/50"
           style={{
             background: "rgba(30, 41, 59, 0.95)",
             boxShadow:
@@ -177,7 +177,7 @@ export default function NavBar() {
 
         {/* Right: Mobile menu - compact floating button */}
         <motion.div
-          className="md:hidden backdrop-blur-xl rounded-2xl border border-blue-400/30 transition-all duration-300 hover:border-blue-400/50"
+          className="md:hidden glass-nav rounded-2xl border border-blue-400/30 transition-all duration-300 hover:border-blue-400/50"
           style={{
             background: "rgba(30, 41, 59, 0.95)",
             boxShadow:
@@ -227,7 +227,7 @@ export default function NavBar() {
           y: isOpen ? 0 : -20,
         }}
         transition={{ duration: 0.3, ease: "easeOut" }}
-        className={`md:hidden mt-4 backdrop-blur-xl rounded-2xl border border-blue-400/30 overflow-hidden ${
+        className={`md:hidden mt-4 glass-nav rounded-2xl border border-blue-400/30 overflow-hidden ${
           isOpen ? "pointer-events-auto" : "pointer-events-none"
         }`}
         style={{

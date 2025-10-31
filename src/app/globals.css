@@ -65,7 +65,11 @@ body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(59, 130, 246, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   border-radius: 1rem;
-  background: linear-gradient(145deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 100%);
+  background: linear-gradient(
+    145deg,
+    rgba(30, 41, 59, 0.95) 0%,
+    rgba(51, 65, 85, 0.9) 100%
+  );
 }
 
 /* Performance optimized glass effects without backdrop-blur */
@@ -74,7 +78,7 @@ body {
 }
 
 .glass-medium {
-  background: rgba(30, 41, 59, 0.90);
+  background: rgba(30, 41, 59, 0.9);
 }
 
 .glass-heavy {
@@ -82,15 +86,23 @@ body {
 }
 
 .glass-nav {
-  background: linear-gradient(145deg, rgba(30, 41, 59, 0.98) 0%, rgba(51, 65, 85, 0.95) 100%);
+  background: linear-gradient(
+    145deg,
+    rgba(30, 41, 59, 0.98) 0%,
+    rgba(51, 65, 85, 0.95) 100%
+  );
 }
 
 .glass-modal {
-  background: linear-gradient(145deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.96) 100%);
+  background: linear-gradient(
+    145deg,
+    rgba(15, 23, 42, 0.98) 0%,
+    rgba(30, 41, 59, 0.96) 100%
+  );
 }
 
 .glass-overlay {
-  background: rgba(0, 0, 0, 0.80);
+  background: rgba(0, 0, 0, 0.8);
 }
 
 /* Performance optimizations for mobile */
@@ -98,12 +110,36 @@ body {
   /* Disable expensive effects on mobile */
   * {
     will-change: auto !important;
+    transform: none !important;
+    animation: none !important;
   }
   
+  /* Disable framer-motion on mobile */
+  [data-framer-motion] {
+    transform: none !important;
+    animation: none !important;
+  }
+
   /* Simplify animations */
   .motion-reduce-mobile {
-    animation-duration: 0.3s !important;
-    transition-duration: 0.3s !important;
+    animation-duration: 0.1s !important;
+    transition-duration: 0.1s !important;
+  }
+  
+  /* Force hardware acceleration off on mobile */
+  body {
+    transform: none;
+    backface-visibility: hidden;
+  }
+  
+  /* Simplify glass effects on mobile */
+  .glass-light,
+  .glass-medium,
+  .glass-heavy,
+  .glass-nav,
+  .glass-modal {
+    background: rgba(30, 41, 59, 0.95) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
   }
 }
 
@@ -170,10 +206,17 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-/* تقليل repaints */
+/* تقليل repaints - disabled on mobile */
 .gpu-accelerated {
-  will-change: transform;
-  transform: translateZ(0);
+  opacity: 1; /* Minimal property to avoid empty ruleset */
+}
+
+/* Mobile performance optimizations */
+@media (max-width: 768px) {
+  .gpu-accelerated {
+    transform: none;
+    will-change: auto;
+  }
 }
 
 ::-webkit-scrollbar {
