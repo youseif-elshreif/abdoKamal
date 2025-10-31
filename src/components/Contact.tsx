@@ -11,7 +11,6 @@ import {
   FiMessageCircle,
   FiCheck,
   FiMapPin,
-  FiClock,
   FiExternalLink,
 } from "react-icons/fi";
 import { useState, useRef, useEffect } from "react";
@@ -177,7 +176,7 @@ function ContactForm() {
                       onChange={handleChange}
                       className={`
                         w-full pl-12 pr-4 py-3 rounded-xl border transition-all duration-300
-                        bg-gray-800/50 backdrop-blur-sm
+                        glass-medium
                         ${
                           errors.name
                             ? "border-red-500/50 focus:border-red-400"
@@ -215,7 +214,7 @@ function ContactForm() {
                       onChange={handleChange}
                       className={`
                         w-full pl-12 pr-4 py-3 rounded-xl border transition-all duration-300
-                        bg-gray-800/50 backdrop-blur-sm
+                        glass-medium
                         ${
                           errors.email
                             ? "border-red-500/50 focus:border-red-400"
@@ -255,7 +254,7 @@ function ContactForm() {
                     onChange={handleChange}
                     className={`
                       w-full pl-12 pr-4 py-3 rounded-xl border transition-all duration-300
-                      bg-gray-800/50 backdrop-blur-sm
+                      glass-medium
                       ${
                         errors.subject
                           ? "border-red-500/50 focus:border-red-400"
@@ -293,7 +292,7 @@ function ContactForm() {
                   onChange={handleChange}
                   className={`
                     w-full px-4 py-3 rounded-xl border transition-all duration-300 resize-none
-                    bg-gray-800/50 backdrop-blur-sm
+                    glass-medium
                     ${
                       errors.message
                         ? "border-red-500/50 focus:border-red-400"
@@ -560,7 +559,7 @@ function MobileFloatingContact() {
     <div className="fixed bottom-6 left-6 z-50 lg:hidden" ref={wrapperRef}>
       {/* Main Circle Button */}
       <motion.button
-        className="w-14 h-14 rounded-full border backdrop-blur border-blue-400/20 flex items-center justify-center shadow-lg hover:scale-110 transition-all duration-300"
+        className="w-14 h-14 rounded-full border glass-nav border-blue-400/20 flex items-center justify-center shadow-lg hover:scale-110 transition-all duration-300"
         onClick={toggleMenu}
         aria-label="Contact Me"
         whileHover={{ scale: 1.1 }}

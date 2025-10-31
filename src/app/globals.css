@@ -60,13 +60,51 @@ body {
     );
 }
 
-/* Custom utilities for dark floating panels */
+/* Custom utilities for dark floating panels - No backdrop blur for performance */
 .card-float {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(59, 130, 246, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   border-radius: 1rem;
-  background: var(--surface-glass);
-  backdrop-filter: blur(16px);
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 100%);
+}
+
+/* Performance optimized glass effects without backdrop-blur */
+.glass-light {
+  background: rgba(30, 41, 59, 0.85);
+}
+
+.glass-medium {
+  background: rgba(30, 41, 59, 0.90);
+}
+
+.glass-heavy {
+  background: rgba(30, 41, 59, 0.95);
+}
+
+.glass-nav {
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.98) 0%, rgba(51, 65, 85, 0.95) 100%);
+}
+
+.glass-modal {
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.96) 100%);
+}
+
+.glass-overlay {
+  background: rgba(0, 0, 0, 0.80);
+}
+
+/* Performance optimizations for mobile */
+@media (max-width: 768px) {
+  /* Disable expensive effects on mobile */
+  * {
+    will-change: auto !important;
+  }
+  
+  /* Simplify animations */
+  .motion-reduce-mobile {
+    animation-duration: 0.3s !important;
+    transition-duration: 0.3s !important;
+  }
 }
 
 .card-float-elevated {

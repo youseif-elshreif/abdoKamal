@@ -117,7 +117,7 @@ export default function ProjectCard({
             {project.tech.slice(0, 3).map((tech) => (
               <span
                 key={tech}
-                className="px-3 py-1 text-xs font-medium rounded-full border border-blue-400/25 backdrop-blur-sm"
+                className="px-3 py-1 text-xs font-medium rounded-full border border-blue-400/25 glass-light"
                 style={{
                   background: "rgba(59, 130, 246, 0.1)",
                   color: "var(--accent)",
@@ -128,7 +128,7 @@ export default function ProjectCard({
             ))}
             {project.tech.length > 3 && (
               <span
-                className="px-3 py-1 text-xs font-medium rounded-full border border-slate-400/25 backdrop-blur-sm"
+                className="px-3 py-1 text-xs font-medium rounded-full border border-slate-400/25 glass-light"
                 style={{
                   background: "rgba(148, 163, 184, 0.1)",
                   color: "var(--text-muted)",

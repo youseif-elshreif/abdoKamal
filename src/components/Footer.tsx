@@ -6,7 +6,6 @@ import {
   FiLinkedin,
   FiGithub,
   FiExternalLink,
-  FiHeart,
   FiArrowUp,
   FiCode,
   FiServer,

@@ -15,7 +15,7 @@ export default function CertificateCard({ certificate }: CertificateCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       whileHover={{ scale: 1.05, y: -6 }}
-      className="backdrop-blur-sm rounded-2xl border border-blue-400/30 overflow-hidden cursor-pointer transition-all duration-500 card-float-elevated hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
+      className="glass-medium rounded-2xl border border-blue-400/30 overflow-hidden cursor-pointer transition-all duration-500 card-float-elevated hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
       style={{ background: "var(--surface-glass)" }}
     >
       <div

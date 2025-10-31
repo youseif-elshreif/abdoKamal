@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import {
   FiGitBranch,
   FiCloud,
@@ -96,7 +95,7 @@ function SkillCard({ group, index }: SkillCardProps) {
 
       {/* Skills list */}
       <div className="space-y-4">
-        {group.skills.map((skill, skillIndex) => (
+        {group.skills.map((skill) => (
           <div
             key={skill.name}
             className="flex items-center justify-between p-3 rounded-xl hover:bg-blue-500/5 transition-all duration-300"
@@ -141,15 +140,7 @@ function SkillCard({ group, index }: SkillCardProps) {
 }
 
 export default function Skills() {
-  const totalSkills = skillGroups.reduce(
-    (total, group) => total + group.skills.length,
-    0
-  );
-  const expertSkills = skillGroups.reduce(
-    (total, group) =>
-      total + group.skills.filter((skill) => skill.level === "Expert").length,
-    0
-  );
+
 
   return (
     <SectionWrapper id="skills" backgroundVariant="default">

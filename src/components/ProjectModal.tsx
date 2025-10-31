@@ -66,7 +66,7 @@ export default function ProjectModal({
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="absolute inset-0 bg-black/70 backdrop-blur-md"
+            className="absolute inset-0 glass-overlay"
             onClick={onClose}
           />
 
@@ -80,7 +80,7 @@ export default function ProjectModal({
             aria-modal="true"
             aria-labelledby="modal-title"
             aria-describedby="modal-description"
-            className="relative backdrop-blur-lg rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-hidden border border-blue-400/30 card-float-elevated"
+            className="relative glass-modal rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-hidden border border-blue-400/30 card-float-elevated"
             style={{
               background: "var(--surface-glass)",
               boxShadow:
@@ -89,7 +89,7 @@ export default function ProjectModal({
           >
             {/* Header */}
             <div
-              className="sticky top-0 backdrop-blur-md border-b border-blue-400/20 px-4 py-3 md:px-8 md:py-6 flex items-center justify-between z-10"
+              className="sticky top-0 glass-heavy border-b border-blue-400/20 px-4 py-3 md:px-8 md:py-6 flex items-center justify-between z-10"
               style={{ background: "var(--surface-elevated)" }}
             >
               <div>
@@ -276,7 +276,7 @@ export default function ProjectModal({
                           duration: 0.3,
                           delay: 0.3 + index * 0.05,
                         }}
-                        className="px-4 py-2 text-sm rounded-full font-medium border border-blue-400/30 hover:shadow-md hover:scale-105 transition-all duration-200 backdrop-blur-sm"
+                        className="px-4 py-2 text-sm rounded-full font-medium border border-blue-400/30 hover:shadow-md hover:scale-105 transition-all duration-200 glass-light"
                         style={{
                           background: "rgba(59, 130, 246, 0.15)",
                           color: "var(--accent)",
@@ -386,14 +386,14 @@ export default function ProjectModal({
                   className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8"
                 >
                   <div
-                    className="backdrop-blur-sm rounded-2xl p-6 border border-blue-400/20 card-float"
+                    className="glass-medium rounded-2xl p-6 border border-blue-400/20 card-float"
                     style={{ background: "var(--surface-glass)" }}
                   >
                     <h3
                       className="text-xl font-bold mb-4 flex items-center gap-2"
                       style={{ color: "var(--text)" }}
                     >
-                      <div className="w-2 h-6 bg-gradient-to-b from-red-400 to-orange-400 rounded-full"></div>
+                      <div className="w-2 h-6 bg-gradient-to-b from-blue-400 to-blue-600 rounded-full"></div>
                       Problem
                     </h3>
                     <p
@@ -405,7 +405,7 @@ export default function ProjectModal({
                   </div>
 
                   <div
-                    className="backdrop-blur-sm rounded-2xl p-6 border border-blue-400/20 card-float"
+                    className="glass-medium rounded-2xl p-6 border border-blue-400/20 card-float"
                     style={{ background: "var(--surface-glass)" }}
                   >
                     <h3
@@ -432,7 +432,7 @@ export default function ProjectModal({
                   className="mb-8"
                 >
                   <div
-                    className="rounded-2xl p-6 border border-blue-400/30 backdrop-blur-sm"
+                    className="rounded-2xl p-6 border border-blue-400/30 glass-medium"
                     style={{
                       background:
                         "linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(29, 78, 216, 0.05))",
