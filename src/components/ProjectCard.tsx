@@ -114,13 +114,9 @@ export default function ProjectCard({
         <div className="px-6 pb-6 space-y-4">
           {/* Tech stack - modern pills */}
           <div className="flex flex-wrap gap-2">
-            {project.tech.slice(0, 3).map((tech, i) => (
-              <motion.span
+            {project.tech.slice(0, 3).map((tech) => (
+              <span
                 key={tech}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2 + i * 0.1 }}
-                viewport={{ once: true, amount: 0.15 }}
                 className="px-3 py-1 text-xs font-medium rounded-full border border-blue-400/25 backdrop-blur-sm"
                 style={{
                   background: "rgba(59, 130, 246, 0.1)",
@@ -128,7 +124,7 @@ export default function ProjectCard({
                 }}
               >
                 {tech}
-              </motion.span>
+              </span>
             ))}
             {project.tech.length > 3 && (
               <span

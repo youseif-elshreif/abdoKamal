@@ -1,13 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ReactNode } from "react";
 
 interface StatusBadgeProps {
   children: ReactNode;
   variant: "success" | "warning" | "error" | "info" | "neutral";
   size?: "sm" | "md" | "lg";
-  animated?: boolean;
   className?: string;
 }
 
@@ -15,7 +13,6 @@ export default function StatusBadge({
   children,
   variant,
   size = "md",
-  animated = false,
   className = "",
 }: StatusBadgeProps) {
   const variantStyles = {
@@ -32,19 +29,9 @@ export default function StatusBadge({
     lg: "px-4 py-2 text-sm rounded-xl",
   };
 
-  const BadgeComponent = animated ? motion.div : "div";
-  const animationProps = animated
-    ? {
-        initial: { scale: 0 },
-        whileInView: { scale: 1 },
-        viewport: { once: true, amount: 0.15 },
-        transition: { type: "spring" as const, stiffness: 300 },
-      }
-    : {};
 
   return (
-    <BadgeComponent
-      {...animationProps}
+    <div
       className={`
         inline-flex 
         items-center 
@@ -58,6 +45,6 @@ export default function StatusBadge({
       `}
     >
       {children}
-    </BadgeComponent>
+    </div>
   );
 }

@@ -13,7 +13,6 @@ import {
   FiTarget,
   FiChevronDown,
   FiChevronUp,
-  FiExternalLink,
 } from "react-icons/fi";
 import { experiences, type Experience } from "../data/experience";
 import {
@@ -164,11 +163,11 @@ function ExperienceCard({
                   >
                     <TypeIcon />
                   </AnimatedIcon>
-                  <StatusBadge variant={typeConfig.variant} animated={true}>
+                  <StatusBadge variant={typeConfig.variant}>
                     {typeConfig.label}
                   </StatusBadge>
                   {experience.endDate === "present" && (
-                    <StatusBadge variant="success" animated={true}>
+                    <StatusBadge variant="success">
                       Current
                     </StatusBadge>
                   )}
@@ -342,32 +341,7 @@ export default function Experience() {
       return newSet;
     });
   };
-
-  const totalExperience = experiences.reduce((total, exp) => {
-    const start = new Date(exp.startDate);
-    const end = exp.endDate === "present" ? new Date() : new Date(exp.endDate!);
-    return (
-      total +
-      Math.round((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24 * 30))
-    );
-  }, 0);
-
-  const formatTotalExperience = () => {
-    if (totalExperience < 12) return `${totalExperience} months`;
-    const years = Math.floor(totalExperience / 12);
-    const months = totalExperience % 12;
-    if (months === 0) return `${years}+ years`;
-    return `${years}.${Math.round((months / 12) * 10)} years`;
-  };
-
-  const completedProjects = experiences.reduce(
-    (total, exp) => total + (exp.achievements?.length || 0),
-    0
-  );
-  const uniqueTechnologies = [
-    ...new Set(experiences.flatMap((exp) => exp.technologies || [])),
-  ].length;
-
+  
   return (
     <SectionWrapper id="experience" className="py-12 sm:py-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">

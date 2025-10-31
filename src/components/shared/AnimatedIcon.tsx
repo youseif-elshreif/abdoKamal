@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ReactNode } from "react";
 
 interface AnimatedIconProps {
@@ -14,11 +13,9 @@ interface AnimatedIconProps {
 
 export default function AnimatedIcon({
   children,
-  variant = "scale",
   size = "md",
   color = "accent",
   className = "",
-  trigger = "hover",
 }: AnimatedIconProps) {
   const sizeStyles = {
     sm: "w-8 h-8",
@@ -35,55 +32,8 @@ export default function AnimatedIcon({
     error: "bg-red-500/15 border-red-400/30 text-red-400",
   };
 
-  const getAnimation = () => {
-    switch (variant) {
-      case "bounce":
-        return {
-          y: [0, -4, 0],
-          transition: {
-            duration: 0.6,
-            repeat: trigger === "always" ? Infinity : 0,
-          },
-        };
-      case "rotate":
-        return {
-          rotate: 360,
-          transition: { duration: 0.5 },
-        };
-      case "pulse":
-        return {
-          scale: [1, 1.1, 1],
-          transition: {
-            duration: 0.6,
-            repeat: trigger === "always" ? Infinity : 0,
-          },
-        };
-      case "scale":
-      default:
-        return {
-          scale: 1.1,
-          transition: { duration: 0.3 },
-        };
-    }
-  };
-
-  const animationProps = {
-    ...(trigger === "view" && {
-      initial: { scale: 0, opacity: 0 },
-      whileInView: { scale: 1, opacity: 1 },
-      viewport: { once: true, amount: 0.15 },
-    }),
-    ...(trigger === "hover" && {
-      whileHover: getAnimation(),
-    }),
-    ...(trigger === "always" && {
-      animate: getAnimation(),
-    }),
-  };
-
   return (
-    <motion.div
-      {...animationProps}
+    <div
       className={`
         rounded-xl 
         border 
@@ -99,6 +49,6 @@ export default function AnimatedIcon({
       `}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
